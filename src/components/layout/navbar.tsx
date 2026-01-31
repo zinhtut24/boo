@@ -47,7 +47,7 @@ export default function Navbar() {
         {/* --- LEFT: Logo Section --- */}
         <div className="flex items-center z-[110] shrink-0"> 
           <Link href="/" className="relative flex items-center">
-            <div className="w-12 h-12 md:w-50 md:h-27 flex md:absolute md:-top-6 items-center justify-center transition-transform duration-500 hover:scale-105 drop-shadow-xl">
+            <div className="w-35 h-45 md:w-50 md:h-27 flex md:absolute md:-top-6 items-center justify-center transition-transform duration-500 hover:scale-105 drop-shadow-xl">
               <img 
                 src="/images/logo.png" 
                 alt="Boo Gift Logo" 
