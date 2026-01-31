@@ -372,7 +372,7 @@ const STUDIO_DATA: any = {
       "9-purple": [
         
       ],
-      "10-white": [
+      "10-purple": [
         
       ],
 
