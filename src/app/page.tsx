@@ -21,7 +21,7 @@ export default function Home() {
   const bouquetImages = [
     "/images/F/R/RR5/3.png",
     "/images/F/L/LW5/5.png",            
-    "/images/F/Lo/LotusP5/1.png"       
+    "/images/F/Lo/lp/1.png"       
   ];
 
   const nextBouquet = () => setActiveBouquet((prev) => (prev + 1) % bouquetImages.length);
