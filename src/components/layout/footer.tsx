@@ -10,7 +10,9 @@ import { motion } from "framer-motion";
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
-  const FB_MESSENGER_URL = "https:/yourfacebookusername"; 
+  const FACEBOOK_URL = "https://www.facebook.com/yourfacebookpage"; 
+  const INSTAGRAM_URL = "https://www.instagram.com/yourinstagramprofile";
+  const FB_MESSENGER_URL = "https://m.me/yourfacebookusername"; 
   const WHATSAPP_URL = "https://wa.me/959789456123";
 
   const footerLinks = {
@@ -32,7 +34,6 @@ export default function Footer() {
   };
 
   return (
-    // 💡 Background အရောင်ကို ပိုစိုပြီး Warm ဖြစ်သော Soft Pastel Peach (#FFF5EE) သို့ ပြောင်းလဲထားပါသည်
     <footer className="bg-[#FFF5EE] text-[#4A4540] pt-12 pb-6 border-t border-[#F5E6DA] relative overflow-hidden">
       
       {/* 🐾 Bubu & Dudu Stickers */}
@@ -64,12 +65,22 @@ export default function Footer() {
             </p>
             
             <div className="flex items-center gap-3 pt-1">
-              <Link href="#" className="w-9 h-9 rounded-xl bg-[#E3F2FD] text-[#1877F2] flex items-center justify-center hover:scale-110 transition-all shadow-sm border border-white">
+              <a 
+                href={FACEBOOK_URL} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="w-9 h-9 rounded-xl bg-[#E3F2FD] text-[#1877F2] flex items-center justify-center hover:scale-110 transition-all shadow-sm border border-white"
+              >
                 <Facebook className="w-4 h-4 fill-current" />
-              </Link>
-              <Link href="#" className="w-9 h-9 rounded-xl bg-[#FFF0F3] text-[#E4405F] flex items-center justify-center hover:scale-110 transition-all shadow-sm border border-white">
+              </a>
+              <a 
+                href={INSTAGRAM_URL} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="w-9 h-9 rounded-xl bg-[#FFF0F3] text-[#E4405F] flex items-center justify-center hover:scale-110 transition-all shadow-sm border border-white"
+              >
                 <Instagram className="w-4 h-4" />
-              </Link>
+              </a>
             </div>
           </div>
 
@@ -105,7 +116,11 @@ export default function Footer() {
                  </div>
                  Chat with Us
                </a>
-               <a href="mailto:hello@boogift.com" className="flex items-center gap-3 text-[#5D5550] hover:text-[#FF85B3] transition-all font-bold group">
+               {/* 💡 EMAIL FIX: target="_self" ကိုသုံးပြီး Mail App တိုက်ရိုက်ပွင့်စေရန် လုပ်ထားပါသည် */}
+               <a 
+                 href="mailto:hello@boogift.com" 
+                 className="flex items-center gap-3 text-[#5D5550] hover:text-[#FF85B3] transition-all font-bold group"
+               >
                  <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center shadow-sm group-hover:rotate-6 transition-transform">
                     <Mail className="w-3.5 h-3.5 text-[#FF85B3]" />
                  </div>

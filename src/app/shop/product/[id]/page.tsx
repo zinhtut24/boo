@@ -5,7 +5,7 @@ import Link from "next/link";
 import { 
   Heart, ShoppingBag, Truck, Star, Plus, Minus, 
   ChevronLeft, ChevronRight, ChevronRightSquare, RefreshCw,
-  CheckCircle2 
+  CheckCircle2, Sparkles 
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion"; 
 import Product3D from "@/components/canvas/product3D";
@@ -15,68 +15,36 @@ import { useWishlistStore } from "@/store/useWishlistStore";
 import { cn } from "@/lib/utils";
 
 const ALL_PRODUCTS = [
+  // --- Flower Bouquet ---
   { 
-    id: "fb-1", 
-    name: "Classic Red Rose", 
-    price: 45000, 
-    category: "Flower Bouquet", 
-    status: "New Arrivals", 
-    img: "/images/Flowers/Rose/download (6).png",
+    id: "fb-1", name: "Classic Red Rose", price: 32500, category: "Flower Bouquet", status: "New Arrivals", img: "/images/F/R/RR5/1.png",
+    // 💡 Flower အတွက် Color Shades များကို ဒီမှာ သတ်မှတ်ထားသည်
+    flowerColors: [
+      { name: "Ruby Red", hex: "#B91C1C" },
+      { name: "Soft Pink", hex: "#FACC15" },
+      { name: "Bright Yellow", hex: "#F472B6" }
+    ],
     gallery: [
-      "/images/Flowers/Rose/download (6).png", 
-      "/images/Flowers/Rose/download (1).png", 
-      "/images/Flowers/Rose/download (2).png", 
-      "/images/Flowers/Rose/download (3).png",
-      "/images/Flowers/Rose/download (4).png",
-       
-      
+      "/images/F/R/RR5/1.png",
+       "/images/F/R/RY5/1.png",
+       "/images/F/R/RP5/1.png",
     ]
   },
   { 
-    id: "fb-2", 
-    name: "White Lily Bloom", 
-    price: 45000, 
-    category: "Flower Bouquet", 
-    status: "Pre-Order", 
-    img: "/images/Flowers/Lilie/download (1).png",
-    gallery: [
-      "/images/Flowers/Lilie/download (1).png", 
-      "/images/Flowers/Lilie/download (7).png", 
-      "/images/Flowers/Lilie/download.png", 
-    ]
+    id: "fb-2", name: "White Lily Bloom", price: 32500, category: "Flower Bouquet", status: "Pre-Order", img: "/images/F/L/LW5/1.png",
+    flowerColors: [{ name: "Pure White", hex: "#F8FAFC" }, { name: "Deep Maroon", hex: "#c746ad" }, { name: "White Pink Mix", hex: "#d71442" }],
+    gallery: ["/images/F/L/LW5/1.png","/images/F/L/LP5/1.png","/images/F/L/LR5/1.png",]
   },
+  { 
+    id: "fb-3", name: "Lotus Elegance", price: 32500, category: "Flower Bouquet", status: "New Arrivals", img: "/images/F/Lo/lp5/1.png",
+    flowerColors: [{ name: "Lotus Pink", hex: "#FBCFE8" }, { name: "Sacred White", hex: "#FFFFFF" }, { name: "Sacred Purple", hex: "#e95dc3" }],
+    gallery: ["/images/F/Lo/lp5/1.png",
+      "/images/F/Lo/lw5/1.png",
+      "/images/F/Lo/pl5/1.png"
 
-  { 
-    id: "fb-3", 
-    name: "Lotus Elegance", 
-    price: 45000, 
-    category: "Flower Bouquet", 
-    status: "New Arrivals", 
-    img: "/images/Flowers/Lotus Flower/download1.png",
-    gallery: [
-      "/images/Flowers/Lotus Flower/download1.png", 
-      "/images/Flowers/Lotus Flower/download (2).png",
-      "/images/Flowers/Lotus Flower/download (1).png",
-      "/images/Flowers/Lotus Flower/download1.png",
     ]
   },
-
-  { 
-    id: "fb-4", 
-    name: "Mixed Bouquet", 
-    price: 45000, 
-    category: "Flower Bouquet", 
-    status: "New Arrivals", 
-    img: "/images/Img/Flower Bouquet/download (1).png",
-    gallery: [
-      "/images/Flowers/Lotus Flower/download (1).png", 
-      "/images/Flowers/Lotus Flower/download (2).png",
-      "/images/Flowers/Lotus Flower/download (3).png",
-      "/images/Flowers/Lotus Flower/download (4).png",
-      "/images/Flowers/Lotus Flower/download (4).png",
-    ]
-  },
-
+  
 // --- Plush Toys Category ---
 { 
   id: "pt-1", 
@@ -612,6 +580,7 @@ const ALL_PRODUCTS = [
       "/images/chocolate/Valitine Chocolate/4.png"
     ]
   },
+
   
 ];
 
@@ -635,6 +604,7 @@ export default function ProductDetail({ params }: { params: Promise<{ id: string
   const product = useMemo(() => ALL_PRODUCTS.find((p) => p.id === id), [id]);
   const isLipstick = product?.category === "Lipstick" && product.colors;
   const isBag = product?.category === "Bag" && product.galleryPairs;
+  const isFlower = product?.category === "Flower Bouquet"; 
   
   const currentMainImage = useMemo(() => {
     if (isLipstick) return isSwapped ? product.colors[activeIndex].lipImg : product.colors[activeIndex].productImg;
@@ -657,6 +627,13 @@ export default function ProductDetail({ params }: { params: Promise<{ id: string
   const isSaved = useMemo(() => wishlist.some(item => item.id === product?.id), [wishlist, product]);
 
   if (!product) return <div className="pt-20 text-center text-gray-400">Product not found</div>;
+
+  const handleAddToCartWithToast = () => {
+    if (product) {
+      addToCart({ id: product.id, name: product.name, price: product.price, img: currentMainImage || product.img, quantity: quantity });
+      setShowToast(true); setTimeout(() => setShowToast(false), 3000);
+    }
+  };
 
   return (
     <main className="flex flex-col w-full min-h-screen relative overflow-x-hidden" style={{ background: "linear-gradient(-45deg, #cb967d, #f5c9ea, #edf7c1, #e5c5b1)", backgroundSize: "400% 400%", animation: "bgFlow 10s ease infinite" }}>
@@ -687,9 +664,22 @@ export default function ProductDetail({ params }: { params: Promise<{ id: string
               </div>
 
               <div className="px-1">
-                {isLipstick ? (
+                {/* 💡 Flower Bouquet ဖြစ်လျှင် Gallery ပုံအစား Color Circles (၃) ရောင်ကိုပြမည် */}
+                {isFlower ? (
+                   <div className="bg-white/40 backdrop-blur-md p-6 rounded-[2rem] border border-white/60 shadow-sm space-y-4">
+                     <div className="flex justify-between items-center px-1">
+                       <span style={{ fontSize: '10px' }} className="font-bold uppercase tracking-[0.3em] text-[#A09080]">Available Shades</span>
+                       <span className="text-[10px] font-medium text-gray-400 italic">{product.flowerColors?.[activeIndex]?.name}</span>
+                     </div>
+                     <div className="flex gap-4">
+                       {product.flowerColors?.map((color: any, index: number) => (
+                         <button key={index} onClick={() => setActiveIndex(index)} className={cn("w-12 h-12 rounded-full border-4 transition-all shrink-0", activeIndex === index ? "border-white ring-2 ring-[#A09080] scale-110 shadow-lg" : "border-transparent opacity-70")} style={{ backgroundColor: color.hex }} />
+                       ))}
+                     </div>
+                   </div>
+                ) : isLipstick ? (
                   <div className="bg-white/40 backdrop-blur-md p-6 rounded-[2rem] border border-white/60 shadow-sm space-y-4">
-                    <div className="flex justify-between items-center px-1"><span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#A09080]">Choose Shade</span><span className="text-[10px] font-medium text-gray-400 italic">{product.colors[activeIndex].name}</span></div>
+                    <div className="flex justify-between items-center px-1"><span style={{ fontSize: '10px' }} className="font-bold uppercase tracking-[0.3em] text-[#A09080]">Choose Shade</span><span className="text-[10px] font-medium text-gray-400 italic">{product.colors[activeIndex].name}</span></div>
                     <div className="flex gap-4 overflow-x-auto pb-2">{product.colors.map((color: any, index: number) => (<button key={index} onClick={() => { setActiveIndex(index); setIsSwapped(false); }} className={cn("w-12 h-12 rounded-full border-4 transition-all shrink-0", activeIndex === index ? "border-white ring-2 ring-[#A09080] scale-110 shadow-lg" : "border-transparent opacity-70")} style={{ backgroundColor: color.hex }} />))}</div>
                   </div>
                 ) : (
@@ -706,18 +696,36 @@ export default function ProductDetail({ params }: { params: Promise<{ id: string
 
             <div className="lg:col-span-5 space-y-6 py-2">
               <div className="space-y-4">
-                {/* 💡 --- PRODUCT NAME DISPLAY --- */}
-                <h1 className="text-4xl md:text-5xl font-serif text-[#2C2926] italic">
-                  Premium <br /> {product.name}
-                </h1>
+                <h1 className="text-4xl md:text-5xl font-serif text-[#2C2926] italic">Premium <br /> {product.name}</h1>
                 <p className="text-2xl font-light text-[#A09080]">{(product.price * quantity).toLocaleString()} MMK</p>
               </div>
+
               <div className="space-y-5 pt-2">
-                <div className="flex items-center justify-between bg-white/40 backdrop-blur-md px-3 py-2 rounded-full border border-white/60"><span className="text-[8px] font-bold uppercase tracking-widest text-gray-500 ml-6">Quantity</span><div className="flex items-center gap-6 mr-1 bg-white/60 rounded-full px-6 py-2.5 shadow-inner"><button onClick={() => quantity > 1 && setQuantity(quantity - 1)} className="hover:text-[#A09080]"><Minus className="w-4 h-4" /></button><span className="font-serif text-lg w-4 text-center">{quantity}</span><button onClick={() => setQuantity(quantity + 1)} className="hover:text-[#A09080]"><Plus className="w-4 h-4" /></button></div></div>
+                {/* 💡 Flower ဖြစ်နေလျှင် Quantity (Quality) ရွေးချယ်သည့်အပိုင်းကို ဖျောက်ထားပါသည် */}
+                {!isFlower && (
+                  <div className="flex items-center justify-between bg-white/40 backdrop-blur-md px-3 py-2 rounded-full border border-white/60">
+                    <span className="text-[8px] font-bold uppercase tracking-widest text-gray-500 ml-6">Quantity</span>
+                    <div className="flex items-center gap-6 mr-1 bg-white/60 rounded-full px-6 py-2.5 shadow-inner">
+                      <button onClick={() => quantity > 1 && setQuantity(quantity - 1)} className="hover:text-[#A09080]"><Minus className="w-4 h-4" /></button>
+                      <span className="font-serif text-lg w-4 text-center">{quantity}</span>
+                      <button onClick={() => setQuantity(quantity + 1)} className="hover:text-[#A09080]"><Plus className="w-4 h-4" /></button>
+                    </div>
+                  </div>
+                )}
+                
                 <div className="flex gap-3">
-                  <button onClick={() => { addToCart({ id: product.id, name: product.name, price: product.price, img: currentMainImage || product.img, quantity: quantity }); setShowToast(true); setTimeout(() => setShowToast(false), 3000); }} className="flex-1 bg-[#2C2926] text-white py-4 rounded-full font-bold uppercase tracking-[0.2em] text-[10px] hover:bg-[#A09080] transition-all shadow-xl active:scale-95 flex items-center justify-center gap-3"><ShoppingBag className="w-4 h-4" /> Add to Shopping Bag</button>
+                  {isFlower ? (
+                    <Link href="/studio" className="flex-1 bg-[#2C2926] text-white py-4 rounded-full font-bold uppercase tracking-[0.2em] text-[10px] hover:bg-[#D09478] transition-all shadow-xl active:scale-95 flex items-center justify-center gap-3">
+                      <Sparkles className="w-4 h-4" /> Customize in Studio
+                    </Link>
+                  ) : (
+                    <button onClick={handleAddToCartWithToast} className="flex-1 bg-[#2C2926] text-white py-4 rounded-full font-bold uppercase tracking-[0.2em] text-[10px] hover:bg-[#A09080] transition-all shadow-xl active:scale-95 flex items-center justify-center gap-3">
+                      <ShoppingBag className="w-4 h-4" /> Add to Shopping Bag
+                    </button>
+                  )}
                   <button onClick={() => toggleWishlist({ id: product.id, name: product.name, price: `${product.price.toLocaleString()} MMK`, img: product.img })} className={cn("p-4 border border-white/60 rounded-full transition-all bg-white/40 shadow-sm", isSaved ? "text-rose-500 border-rose-100" : "hover:text-rose-400")}><Heart className={cn("w-5 h-5", isSaved && "fill-current")} /></button>
                 </div>
+
                 <div className="flex items-center gap-4 p-5 bg-white/30 backdrop-blur-md rounded-[1.5rem] border border-white/40 shadow-sm"><div className="p-2.5 bg-white/60 text-[#A09080] rounded-full"><Truck className="w-5 h-5" /></div><div><h4 className="text-[9px] font-bold uppercase tracking-widest text-[#2C2926]">Bespoke Delivery</h4><p className="text-[10px] text-gray-500 mt-1 font-light italic">Carefully delivered across Yangon.</p></div></div>
               </div>
             </div>

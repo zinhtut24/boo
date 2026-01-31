@@ -17,10 +17,10 @@ const STATUS_FILTERS = ["Everything", "New Arrivals", "Pre-order"];
 
 const PRODUCTS = [
   // --- Flower Bouquet ---
-  { id: "fb-1", name: "Classic Red Rose", price: 45000, category: "Flower Bouquet", status: "New Arrivals", img: "/images/Flowers/Rose/download (6).png" },
-  { id: "fb-2", name: "White Lily Bloom", price: 55000, category: "Flower Bouquet", status: "Pre-order", img: "/images/Flowers/Lilie/download (1).png" },
-  { id: "fb-3", name: "Lotus Elegance", price: 45000, category: "Flower Bouquet", status: "New Arrivals", img: "/images/Flowers/Lotus Flower/download1.png" },
-  { id: "fb-4", name: "Mixed Bouquet", price: 55000, category: "Flower Bouquet", status: "Pre-order", img: "/images/Img/Flower Bouquet/download (1).png" },
+  { id: "fb-1", name: "Classic Red Rose", price: 32500, category: "Flower Bouquet", status: "New Arrivals", img: "/images/F/R/RR5/1.png", },
+  { id: "fb-2", name: "White Lily Bloom", price: 32500, category: "Flower Bouquet", status: "Pre-order", img:"/images/F/L/LW5/1.png",},
+  { id: "fb-3", name: "Lotus Elegance", price: 32500, category: "Flower Bouquet", status: "New Arrivals", img: "/images/F/Lo/lp5/1.png", },
+  
 
   // --- Plush Toys ---
   { id: "pt-1", name: "Bu Bu", price: 20000, category: "Plush Toys", status: "New Arrivals", img: "/images/Plush/Bu Bu/1.png" },
