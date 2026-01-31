@@ -4,7 +4,7 @@ import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import { 
   Heart, Search, ShoppingBag, ArrowRight, Sparkles, ChevronRight,
-  CheckCircle2 
+  CheckCircle2, ArrowUp 
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Footer from "@/components/layout/footer";
@@ -12,6 +12,7 @@ import { cn } from "@/lib/utils";
 import { useWishlistStore } from "@/store/useWishlistStore";
 import { useCartStore } from "@/store/useCartStore";
 
+// --- PRODUCTS ဒေတာများ အားလုံး အရင်အတိုင်း ထားရှိပါသည် ---
 const CATEGORIES = ["All", "Flower Bouquet", "Plush Toys", "Blind Box", "Lipstick", "Bag", "Chocolate"];
 const STATUS_FILTERS = ["Everything", "New Arrivals", "Pre-order"];
 
@@ -72,12 +73,27 @@ export default function ShopPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [mounted, setMounted] = useState(false);
   const [showToast, setShowToast] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
 
   const wishlist = useWishlistStore((state) => state.wishlist);
   const toggleWishlist = useWishlistStore((state) => state.toggleWishlist);
   const addToCart = useCartStore((state) => state.addToCart);
 
-  useEffect(() => { setMounted(true); }, []);
+  useEffect(() => { 
+    setMounted(true); 
+
+    const handleScroll = () => {
+      if (window.scrollY > 400) setShowScrollTop(true);
+      else setShowScrollTop(false);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   const handleQuickAdd = (product: any) => {
     addToCart({ id: product.id, name: product.name, price: product.price, img: product.img, quantity: 1 });
@@ -98,7 +114,7 @@ export default function ShopPage() {
 
   return (
     <main 
-      className="flex flex-col w-full min-h-screen relative" // 💡 overflow-x-hidden ကို ဖယ်လိုက်ပါသည် (Sticky အလုပ်လုပ်ရန်)
+      className="flex flex-col w-full min-h-screen relative" 
       style={{
         background: "linear-gradient(-45deg, #cb967d, #f5c9ea, #edf7c1, #e5c5b1)",
         backgroundSize: "400% 400%",
@@ -134,6 +150,7 @@ export default function ShopPage() {
       </div>
 
       <div className="relative z-10 w-full text-[#2C2926]">
+        
         {/* SUCCESS TOAST */}
         <AnimatePresence>
           {showToast && (
@@ -183,17 +200,33 @@ export default function ShopPage() {
         </header>
 
         <div className="container mx-auto px-10 max-w-[1600px] py-16 flex flex-col lg:flex-row gap-20">
-          {/* 💡 SIDEBAR: Sticky logic ensures it stays while scrolling */}
           <aside className="lg:w-64 shrink-0 relative">
-            <div className="sticky top-32 space-y-8 pr-10 border-r border-white/10 min-h-[400px]">
-              <h3 className="text-[10px] font-bold uppercase tracking-[0.3em] text-gray-400">Collections</h3>
-              <div className="flex flex-col space-y-2">
-                {CATEGORIES.map(cat => (
-                  <button key={cat} onClick={() => setActiveCategory(cat)} className={cn("flex items-center justify-between py-3.5 px-5 rounded-2xl text-[11px] uppercase tracking-wider transition-all duration-300", activeCategory === cat ? "bg-[#2C2926] text-white shadow-xl scale-105" : "text-gray-500 hover:text-[#A09080] hover:bg-white/40")}>
-                    {cat} {activeCategory === cat && <ChevronRight className="w-3 h-3" />}
-                  </button>
-                ))}
+            <div className="sticky top-32 space-y-8 pr-10 border-r border-white/10 min-h-[400px] flex flex-col justify-between">
+              <div>
+                <h3 className="text-[10px] font-bold uppercase tracking-[0.3em] text-gray-400 mb-6">Collections</h3>
+                <div className="flex flex-col space-y-2">
+                  {CATEGORIES.map(cat => (
+                    <button key={cat} onClick={() => setActiveCategory(cat)} className={cn("flex items-center justify-between py-3.5 px-5 rounded-2xl text-[11px] uppercase tracking-wider transition-all duration-300", activeCategory === cat ? "bg-[#2C2926] text-white shadow-xl scale-105" : "text-gray-500 hover:text-[#A09080] hover:bg-white/40")}>
+                      {cat} {activeCategory === cat && <ChevronRight className="w-3 h-3" />}
+                    </button>
+                  ))}
+                </div>
               </div>
+
+              {/* 💡 --- MINIMALIST BACK TO TOP LINK --- 💡 */}
+              <AnimatePresence>
+                {showScrollTop && (
+                  <motion.button
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.8 }}
+                    onClick={scrollToTop}
+                    className="mt-10 self-start ml-5 w-10 h-10 rounded-full bg-white/20 backdrop-blur-md border border-white/40 text-gray-400 hover:text-[#2C2926] hover:bg-white/40 transition-all flex items-center justify-center shadow-lg group active:scale-90"
+                  >
+                    <ArrowUp className="w-4 h-4 group-hover:-translate-y-0.5 transition-transform" />
+                  </motion.button>
+                )}
+              </AnimatePresence>
             </div>
           </aside>
 
