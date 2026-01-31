@@ -800,3 +800,4 @@ const PRODUCTS = [
   { id: "ch-4", name: "Strawberry Fruit Chocolate", price: 15000, category: "Chocolate", status: "New Arrivals", img: "/images/chocolate/Strawberry Fruit Chocolate/3.png" },
   { id: "ch-5", name: "Valitine Chocolate", price: 15000, category: "Chocolate", status: "New Arrivals", img: "/images/chocolate/Valitine Chocolate/1.png" },
 ];
+
