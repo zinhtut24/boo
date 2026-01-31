@@ -13,8 +13,8 @@ import Footer from "@/components/layout/footer";
 export default function Home() {
   const [mounted, setMounted] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-
   const [activeBouquet, setActiveBouquet] = useState(0);
+
   const bouquetImages = [
     "/images/Flowers/Rose/download (6).png",
     "/images/Img/Bags/Dior 1.png",            
@@ -38,9 +38,9 @@ export default function Home() {
   const collections = [
     { id: "fb-1", name: "Eternal Roses", price: "2000 MMK", img: "/images/Flowers/Rose/download (6).png", link: "/shop/product/fb-1" },
     { id: "pt-4", name: "Hello Kitty", price: "35000 MMK", img: "/images/Plush/Hello Kitty/1.png", link: "/shop/product/pt-4" },
-    { id: "bb-5", name: "Skullpanda2 Blind Box", price: "$55.00", img: "/images/Blindbox/skullpanda2/skullpanda2.png", link: "/shop/product/bb-5" },
-    { id: "ls-1", name: "Romand Juicy", price: "$25.00", img: "/images/lipstick/romandjuicyseries/lip1/gold.png", link: "/shop/product/ls-1" },
-    { id: "bg-3", name: "Dior", price: "$85.00", img: "/images/Img/Bags/Dior 1.png", link: "/shop/product/bg-3" },
+    { id: "bb-5", name: "Skullpanda2 Blind Box", price: "125000 MMK", img: "/images/Blindbox/skullpanda2/skullpanda2.png", link: "/shop/product/bb-5" },
+    { id: "ls-1", name: "Romand Juicy", price: "25000 MMK", img: "/images/lipstick/romandjuicyseries/lip1/gold.png", link: "/shop/product/ls-1" },
+    { id: "bg-3", name: "Dior", price: "125000 MMK", img: "/images/Img/Bags/Dior 1.png", link: "/shop/product/bg-3" },
   ];
 
   return (
@@ -58,10 +58,7 @@ export default function Home() {
           50% { background-position: 100% 50%; }
           100% { background-position: 0% 50%; }
         }
-        ::selection {
-          background-color: #D09478;
-          color: white;
-        }
+        ::selection { background-color: #D09478; color: white; }
       `}} />
 
       {/* --- ✨ INTERACTIVE SPARKLE TRAIL --- */}
@@ -71,7 +68,7 @@ export default function Home() {
         transition={{ type: "spring", damping: 20, stiffness: 200, mass: 0.5 }}
       />
 
-      {/* --- ✨ Blind LAYER --- */}
+      {/* --- ✨ BLING LAYER --- */}
       <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
         {[...Array(80)].map((_, i) => {
           const rand = Math.random();
@@ -103,8 +100,16 @@ export default function Home() {
         
         {/* 1. HERO SECTION */}
         <section className="relative min-h-screen flex flex-col items-center justify-center px-6">
-          <motion.img src="/images/bubu1.png" className="absolute w-24 md:w-32 left-[5%] top-[20%] pointer-events-auto" whileHover={{ rotate: [0, -10, 10, 0], scale: 1.1 }} />
-          <motion.img src="/images/bubu2.gif" className="absolute w-20 md:w-28 right-[5%] top-[25%] pointer-events-auto" whileTap={{ scale: 0.9 }} />
+          <motion.img 
+            src="/images/bubu1.png" 
+            className="absolute w-24 md:w-32 left-[5%] top-[20%] pointer-events-auto z-20" 
+            whileHover={{ rotate: [0, -10, 10, 0], scale: 1.1 }} 
+          />
+          <motion.img 
+            src="/images/bubu2.gif" 
+            className="absolute w-20 md:w-28 right-[5%] top-[25%] pointer-events-auto z-20 opacity-80" 
+            whileTap={{ scale: 0.9 }} 
+          />
 
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ staggerChildren: 0.2 }} className="container max-w-6xl text-center space-y-10">
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="flex items-center justify-center gap-4">
@@ -117,14 +122,32 @@ export default function Home() {
               Art of <br /> <span className="italic font-light text-[#D09478]">Memories.</span>
             </motion.h1>
 
-            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }} className="text-base md:text-xl max-w-xl mx-auto font-light leading-relaxed">
+            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }} className="text-base md:text-xl max-w-xl mx-auto font-light leading-relaxed opacity-80">
               Where luxury flowers, couture plushies, and the iconic Boo Blind Box converge to create unforgettable memories.
             </motion.p>
 
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }} className="flex flex-col sm:flex-row items-center justify-center gap-8 pt-6">
-              <Link href="/shop/collection" className="bg-[#2C2926] text-white px-12 py-5 rounded-full font-bold uppercase tracking-widest text-[11px] hover:bg-[#D09478] transition-all duration-500 shadow-xl flex items-center gap-2 group">
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }} className="flex flex-col items-center justify-center pt-6 space-y-12 w-full">
+              <Link href="/shop/collection" className="bg-[#2C2926] text-white px-12 py-5 rounded-full font-bold uppercase tracking-widest text-[11px] hover:bg-[#D09478] transition-all duration-500 shadow-xl flex items-center gap-2 group z-20">
                 Explore Shop <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
+
+              {/* 💡 --- RUNNING BUBU DUDU (No Line Edition) --- 💡 */}
+              <div className="relative w-full h-20 flex items-center overflow-visible">
+                <motion.div 
+                  className="absolute flex items-center"
+                  animate={{ x: ["-10vw", "100vw", "-10vw"] }}
+                  transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
+                >
+                  <motion.div
+                    className="flex flex-col items-center"
+                    animate={{ scaleX: [1, 1, -1, -1, 1] }}
+                    transition={{ duration: 18, repeat: Infinity, times: [0, 0.48, 0.5, 0.98, 1] }}
+                  >
+                    <img src="/images/budurun.gif" className="w-20 md:w-28 drop-shadow-xl" alt="Running" />
+                    <div className="w-10 h-1.5 bg-black/5 rounded-full blur-sm mt-1" />
+                  </motion.div>
+                </motion.div>
+              </div>
             </motion.div>
           </motion.div>
         </section>
@@ -148,54 +171,21 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 3. 3D STUDIO PREVIEW (Updated with Slider Arrows & Animation) */}
+        {/* 3. 3D STUDIO PREVIEW */}
         <section className="py-32 relative">
           <div className="container mx-auto px-6 max-w-7xl grid md:grid-cols-2 items-center gap-20">
-            
-            {/* 💡 Bouquet Slider Wrapper */}
             <div className="relative group">
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.9 }} 
-                whileInView={{ opacity: 1, scale: 1 }} 
-                viewport={{ once: true }} 
-                transition={{ duration: 1 }} 
-                className="relative aspect-square bg-white/40 rounded-[4rem] border border-white/60 shadow-2xl flex items-center justify-center overflow-hidden backdrop-blur-md"
-              >
-                {/* 💡 အထဲတွင် ပန်းစည်းပုံကို ပြောင်းလဲပေးသော logic */}
+              <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 1 }} className="relative aspect-square bg-white/40 rounded-[4rem] border border-white/60 shadow-2xl flex items-center justify-center overflow-hidden backdrop-blur-md">
                 <AnimatePresence mode="wait">
-                  <motion.div
-                    key={activeBouquet}
-                    initial={{ opacity: 0, x: 50 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -50 }}
-                    transition={{ duration: 0.5 }}
-                    className="w-full h-full p-10 flex items-center justify-center"
-                  >
-                    <Product3D imageUrl={bouquetImages[activeBouquet]} />
-                  </motion.div>
+                  <motion.div key={activeBouquet} initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -50 }} transition={{ duration: 0.5 }} className="w-full h-full p-10 flex items-center justify-center"><Product3D imageUrl={bouquetImages[activeBouquet]} /></motion.div>
                 </AnimatePresence>
-
-                {/* 💡 ဘေးကိုဆွဲကြည့်ရန် မြှားလေးများ */}
-                <button 
-                  onClick={prevBouquet}
-                  className="absolute left-6 w-12 h-12 rounded-full bg-white/30 backdrop-blur-md border border-white/40 flex items-center justify-center hover:bg-white transition-all opacity-0 group-hover:opacity-100"
-                >
-                  <ChevronLeft className="w-6 h-6 text-[#2C2926]" />
-                </button>
-                <button 
-                  onClick={nextBouquet}
-                  className="absolute right-6 w-12 h-12 rounded-full bg-white/30 backdrop-blur-md border border-white/40 flex items-center justify-center hover:bg-white transition-all opacity-0 group-hover:opacity-100"
-                >
-                  <ChevronRight className="w-6 h-6 text-[#2C2926]" />
-                </button>
+                <button onClick={prevBouquet} className="absolute left-6 w-12 h-12 rounded-full bg-white/30 backdrop-blur-md border border-white/40 flex items-center justify-center hover:bg-white transition-all opacity-0 group-hover:opacity-100"><ChevronLeft className="w-6 h-6 text-[#2C2926]" /></button>
+                <button onClick={nextBouquet} className="absolute right-6 w-12 h-12 rounded-full bg-white/30 backdrop-blur-md border border-white/40 flex items-center justify-center hover:bg-white transition-all opacity-0 group-hover:opacity-100"><ChevronRight className="w-6 h-6 text-[#2C2926]" /></button>
               </motion.div>
             </div>
-
             <div className="space-y-8">
               <h2 className="text-6xl md:text-8xl font-serif text-[#2C2926]">Masterpiece <span className="italic font-light text-[#D09478]">Studio.</span></h2>
-              <p className="text-lg text-[#2C2926]/70 leading-relaxed font-light italic border-l-4 border-[#D09478]/40 pl-8">
-                Every flower has a story; every gift is a memory. Create your own luxury floral arrangement in our real-time studio—where your imagination becomes a reality.
-              </p>
+              <p className="text-lg text-[#2C2926]/70 leading-relaxed font-light italic border-l-4 border-[#D09478]/40 pl-8">Every flower has a story; every gift is a memory. Create your own luxury floral arrangement in our real-time studio—where your imagination becomes a reality.</p>
               <Link href="/studio" className="inline-flex items-center gap-4 bg-[#2C2926] text-white px-12 py-5 rounded-full font-bold uppercase tracking-widest text-[11px] hover:bg-[#D09478] transition-all shadow-xl">Launch Studio <ChevronRight className="w-4 h-4" /></Link>
             </div>
           </div>
@@ -211,22 +201,13 @@ export default function Home() {
               </div>
               <Link href="/shop/collection" className="text-[10px] font-bold uppercase tracking-widest border-b-2 border-[#2C2926] pb-1 hover:text-[#D09478] hover:border-[#D09478] transition-all">Browse All</Link>
             </div>
-
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
               {collections.map((item) => (
                 <Link key={item.id} href={item.link}>
-                  <motion.div 
-                    initial={{ opacity: 0, y: 20 }} 
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }} 
-                    whileHover={{ y: -10 }}
-                    className="group cursor-pointer space-y-4 text-center relative"
-                  >
+                  <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} whileHover={{ y: -10 }} className="group cursor-pointer space-y-4 text-center relative">
                     <div className="aspect-[3/4] rounded-[2rem] overflow-hidden bg-white/40 relative shadow-sm group-hover:shadow-2xl transition-all duration-1000 border border-white/60">
                       <img src={item.img} className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110" alt={item.name} />
-                      <div className="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-500 bg-gradient-to-t from-[#2C2926]/80 to-transparent">
-                          <span className="text-[9px] text-white font-bold uppercase tracking-[0.2em]">Shop Now</span>
-                      </div>
+                      <div className="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-500 bg-gradient-to-t from-[#2C2926]/80 to-transparent"><span className="text-[9px] text-white font-bold uppercase tracking-[0.2em]">Shop Now</span></div>
                     </div>
                     <h3 className="text-[11px] font-bold uppercase tracking-widest text-[#2C2926] group-hover:text-[#A09080] transition-colors">{item.name}</h3>
                     <p className="text-[11px] text-[#A09080] font-bold">{item.price}</p>
