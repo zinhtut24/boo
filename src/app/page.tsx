@@ -19,9 +19,9 @@ export default function Home() {
   const [stickerMessage, setStickerMessage] = useState<string | null>(null);
 
   const bouquetImages = [
-    "/images/Flowers/Rose/download (6).png",
-    "/images/Img/Bags/Dior 1.png",            
-    "/images/Plush/Hello Kitty/1.png"       
+    "/images/F/R/RR5/3.png",
+    "/images/F/L/LW5/5.png",            
+    "/images/F/Lo/LotusP5/1.png"       
   ];
 
   const nextBouquet = () => setActiveBouquet((prev) => (prev + 1) % bouquetImages.length);
