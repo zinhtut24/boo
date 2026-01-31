@@ -10,7 +10,7 @@ import { motion } from "framer-motion";
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
-  const FB_MESSENGER_URL = "https://m.me/yourfacebookusername"; 
+  const FB_MESSENGER_URL = "https:/yourfacebookusername"; 
   const WHATSAPP_URL = "https://wa.me/959789456123";
 
   const footerLinks = {

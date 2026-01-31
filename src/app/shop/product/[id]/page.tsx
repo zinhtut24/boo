@@ -462,11 +462,11 @@ const ALL_PRODUCTS = [
     status: "New Arrivals", 
     img: "/images/lipstick/judydoll_lipgloss/02/02.png",
     colors: [
-      { name: "Ruby Red", hex: "#A60000", productImg: "/images/lipstick/judydoll_lipgloss/02/02.png", lipImg: "/images/lipstick/judydoll_lipgloss/02/lip02.jpg" },
-      { name: "Soft Pink", hex: "#E88AB5", productImg: "/images/lipstick/judydoll_lipgloss/06/06.png", lipImg: "/images/lipstick/judydoll_lipgloss/06/lip06.jpg" },
-      { name: "Maple Orange", hex: "#C04B24", productImg: "/images/lipstick/judydoll_lipgloss/07/07.png", lipImg: "/images/lipstick/judydoll_lipgloss/07/lip07.jpg" },
-      { name: "Nude Peach", hex: "#D9A191", productImg: "/images/lipstick/judydoll_lipgloss/09/09.png", lipImg: "/images/lipstick/judydoll_lipgloss/09/lip09.jpg" },
-      { name: "Berry Wine", hex: "#6B001A", productImg: "/images/lipstick/judydoll_lipgloss/010/010.png", lipImg: "/images/lipstick/judydoll_lipgloss/010/lip010.jpg" },
+      { name: "Ruby Red", hex: "#D74540", productImg: "/images/lipstick/judydoll_lipgloss/02/02.png", lipImg: "/images/lipstick/judydoll_lipgloss/02/lip02.jpg" },
+      { name: "Soft Pink", hex: "#BA5633", productImg: "/images/lipstick/judydoll_lipgloss/06/06.png", lipImg: "/images/lipstick/judydoll_lipgloss/06/lip06.jpg" },
+      { name: "Maple Orange", hex: "#8E1825", productImg: "/images/lipstick/judydoll_lipgloss/07/07.png", lipImg: "/images/lipstick/judydoll_lipgloss/07/lip07.jpg" },
+      { name: "Nude Peach", hex: "#B81F25", productImg: "/images/lipstick/judydoll_lipgloss/09/09.png", lipImg: "/images/lipstick/judydoll_lipgloss/09/lip09.jpg" },
+      { name: "Berry Wine", hex: "#A32E37", productImg: "/images/lipstick/judydoll_lipgloss/010/010.png", lipImg: "/images/lipstick/judydoll_lipgloss/010/lip010.jpg" },
     ]
   },
 
@@ -478,12 +478,12 @@ const ALL_PRODUCTS = [
     status: "New Arrivals", 
     img: "/images/lipstick/romandjuicyseries/lip1/gold.png",
     colors: [
-      { name: "Jujube", hex: "#A4403D", productImg: "/images/lipstick/romandjuicyseries/lip1/gold.png", lipImg: "/images/lipstick/romandjuicyseries/lip1/lip1.png" },
-      { name: "Apple Brown", hex: "#A0522D", productImg: "/images/lipstick/romandjuicyseries/lip2/brown.png", lipImg: "/images/lipstick/romandjuicyseries/lip2/lip2.png" },
-      { name: "Litchi Coral", hex: "#E97451", productImg: "/images/lipstick/romandjuicyseries/lip3/orange.png", lipImg: "/images/lipstick/romandjuicyseries/lip3/lip3-.png" },
-      { name: "Nudy Peanut", hex: "#D38C77", productImg: "/images/lipstick/romandjuicyseries/lip4/pink.png", lipImg: "/images/lipstick/romandjuicyseries/lip4/lip4.png" },
+      { name: "Jujube", hex: "#B84C40", productImg: "/images/lipstick/romandjuicyseries/lip1/gold.png", lipImg: "/images/lipstick/romandjuicyseries/lip1/lip1.png" },
+      { name: "Apple Brown", hex: "#810004", productImg: "/images/lipstick/romandjuicyseries/lip2/brown.png", lipImg: "/images/lipstick/romandjuicyseries/lip2/lip2.png" },
+      { name: "Litchi Coral", hex: "#EC5249", productImg: "/images/lipstick/romandjuicyseries/lip3/orange.png", lipImg: "/images/lipstick/romandjuicyseries/lip3/lip3-.png" },
+      { name: "Nudy Peanut", hex: "#CD6870", productImg: "/images/lipstick/romandjuicyseries/lip4/pink.png", lipImg: "/images/lipstick/romandjuicyseries/lip4/lip4.png" },
       { name: "Pink Pumpkin", hex: "#D87093", productImg: "/images/lipstick/romandjuicyseries/lip5/pinkpurple.png", lipImg: "/images/lipstick/romandjuicyseries/lip5/lip5.png" },
-      { name: "Pink Pumpkin", hex: "#D87093", productImg: "/images/lipstick/romandjuicyseries/lip6/pinkred.png", lipImg: "/images/lipstick/romandjuicyseries/lip6/lip6.png" }
+      { name: "Pink Pumpkin", hex: "#C00049", productImg: "/images/lipstick/romandjuicyseries/lip6/pinkred.png", lipImg: "/images/lipstick/romandjuicyseries/lip6/lip6.png" }
     ]
 },
 
@@ -495,11 +495,11 @@ const ALL_PRODUCTS = [
     status: "New Arrivals", 
     img: "/images/lipstick/timephoria/01/01.png",
     colors: [
-      { name: "Rose Whisper", hex: "#E07A5F", productImg: "/images/lipstick/timephoria/01/01.png", lipImg: "/images/lipstick/timephoria/01/lip01.jpg" },
-      { name: "Sunset Glow", hex: "#FF4500", productImg: "/images/lipstick/timephoria/001/001.png", lipImg: "/images/lipstick/timephoria/001/lip001.jpg" },
-      { name: "Deep Mocha", hex: "#5D4037", productImg: "/images/lipstick/timephoria/13/13.png", lipImg: "/images/lipstick/timephoria/13/lip13.jpg" },
-      { name: "Vintage Wine", hex: "#800020", productImg: "/images/lipstick/timephoria/09/09.png", lipImg: "/images/lipstick/timephoria/09/09lip.jpg" },
-      { name: "Vintage Wine", hex: "#800020", productImg: "/images/lipstick/timephoria/17/17.png", lipImg: "/images/lipstick/timephoria/17/lip17.jpg" }
+      { name: "Rose Whisper", hex: "#A32524", productImg: "/images/lipstick/timephoria/01/01.png", lipImg: "/images/lipstick/timephoria/01/lip01.jpg" },
+      { name: "Sunset Glow", hex: "#D8677F", productImg: "/images/lipstick/timephoria/001/001.png", lipImg: "/images/lipstick/timephoria/001/lip001.jpg" },
+      { name: "Deep Mocha", hex: "#E14B98", productImg: "/images/lipstick/timephoria/13/13.png", lipImg: "/images/lipstick/timephoria/13/lip13.jpg" },
+      { name: "Vintage Wine", hex: "#A1001E", productImg: "/images/lipstick/timephoria/09/09.png", lipImg: "/images/lipstick/timephoria/09/09lip.jpg" },
+      { name: "Vintage Wine", hex: "#CC0010", productImg: "/images/lipstick/timephoria/17/17.png", lipImg: "/images/lipstick/timephoria/17/lip17.jpg" }
     ]
 },
 
@@ -511,12 +511,12 @@ const ALL_PRODUCTS = [
     status: "New Arrivals", 
     img: "/images/lipstick/bbia_glow_tint/1/1.png",
     colors: [
-      { name: "Chai Bottle", hex: "#D28C7A", productImg: "/images/lipstick/bbia_glow_tint/1/1.png", lipImg: "/images/lipstick/bbia_glow_tint/1/11.png" },
-      { name: "Vintage Bottle", hex: "#B35B4D", productImg: "/images/lipstick/bbia_glow_tint/2/2.png", lipImg: "/images/lipstick/bbia_glow_tint/2/22.png" },
-      { name: "Mauve Bottle", hex: "#A57D8B", productImg: "/images/lipstick/bbia_glow_tint/3/3.png", lipImg: "/images/lipstick/bbia_glow_tint/3/33.png" },
-      { name: "Cinnamon Bottle", hex: "#8E443D", productImg: "/images/lipstick/bbia_glow_tint/4/4.png", lipImg: "/images/lipstick/bbia_glow_tint/4/44.png" },
-      { name: "Vinous Bottle", hex: "#6D2B35", productImg: "/images/lipstick/bbia_glow_tint/5/5.png", lipImg: "/images/lipstick/bbia_glow_tint/5/55.png" },
-      { name: "Vinous Bottle", hex: "#6D2B35", productImg: "/images/lipstick/bbia_glow_tint/5/5.png", lipImg: "/images/lipstick/bbia_glow_tint/6/66.png" }
+      { name: "Chai Bottle", hex: "#A70421", productImg: "/images/lipstick/bbia_glow_tint/1/1.png", lipImg: "/images/lipstick/bbia_glow_tint/1/11.png" },
+      { name: "Vintage Bottle", hex: "#B0254B", productImg: "/images/lipstick/bbia_glow_tint/2/2.png", lipImg: "/images/lipstick/bbia_glow_tint/2/22.png" },
+      { name: "Mauve Bottle", hex: "#DD928E", productImg: "/images/lipstick/bbia_glow_tint/3/3.png", lipImg: "/images/lipstick/bbia_glow_tint/3/33.png" },
+      { name: "Cinnamon Bottle", hex: "#E593AD", productImg: "/images/lipstick/bbia_glow_tint/4/4.png", lipImg: "/images/lipstick/bbia_glow_tint/4/44.png" },
+      { name: "Vinous Bottle", hex: "#A63C33", productImg: "/images/lipstick/bbia_glow_tint/5/5.png", lipImg: "/images/lipstick/bbia_glow_tint/5/55.png" },
+      { name: "Vinous Bottle", hex: "#8F2A23", productImg: "/images/lipstick/bbia_glow_tint/5/5.png", lipImg: "/images/lipstick/bbia_glow_tint/6/66.png" }
     ]
 },
 
@@ -528,12 +528,12 @@ const ALL_PRODUCTS = [
     status: "New Arrivals", 
     img: "/images/lipstick/mac_lipmatte/1/1.png",
     colors: [
-      { name: "Ruby Woo", hex: "#BC2132", productImg: "/images/lipstick/mac_lipmatte/1/1.png", lipImg: "/images/lipstick/mac_lipmatte/1/11.png" },
-      { name: "Russian Red", hex: "#8E0013", productImg: "/images/lipstick/mac_lipmatte/2/2.png", lipImg: "/images/lipstick/mac_lipmatte/2/22.png" },
-      { name: "Chili", hex: "#9E3224", productImg: "/images/lipstick/mac_lipmatte/3/3.png", lipImg: "/images/lipstick/mac_lipmatte/3/33.png" },
-      { name: "Diva", hex: "#5D1924", productImg: "/images/lipstick/mac_lipmatte/4/4.png", lipImg: "/images/lipstick/mac_lipmatte/4/44.png" },
-      { name: "Chili", hex: "#9E3224", productImg: "/images/lipstick/mac_lipmatte/3/3.png", lipImg: "/images/lipstick/mac_lipmatte/5/55.png" },
-      { name: "Diva", hex: "#5D1924", productImg: "/images/lipstick/mac_lipmatte/4/4.png", lipImg: "/images/lipstick/mac_lipmatte/6/66.png" }
+      { name: "Ruby Woo", hex: "#E10017", productImg: "/images/lipstick/mac_lipmatte/1/1.png", lipImg: "/images/lipstick/mac_lipmatte/1/11.png" },
+      { name: "Russian Red", hex: "#E52F7F", productImg: "/images/lipstick/mac_lipmatte/2/2.png", lipImg: "/images/lipstick/mac_lipmatte/2/22.png" },
+      { name: "Chili", hex: "#F65A66", productImg: "/images/lipstick/mac_lipmatte/3/3.png", lipImg: "/images/lipstick/mac_lipmatte/3/33.png" },
+      { name: "Diva", hex: "#ED9A88", productImg: "/images/lipstick/mac_lipmatte/4/4.png", lipImg: "/images/lipstick/mac_lipmatte/4/44.png" },
+      { name: "Chili", hex: "#F84155", productImg: "/images/lipstick/mac_lipmatte/3/3.png", lipImg: "/images/lipstick/mac_lipmatte/5/55.png" },
+      { name: "Diva", hex: "#EAAD9F", productImg: "/images/lipstick/mac_lipmatte/4/4.png", lipImg: "/images/lipstick/mac_lipmatte/6/66.png" }
     ]
 },
 
