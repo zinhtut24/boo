@@ -1,0 +1,47 @@
+// src/prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  name        String
+  description String
+  price       Float
+  category    String   // Flower, Plush Toy, Blind Box, etc.
+  images      String[]
+  stock       Int      @default(0)
+  
+  // 3D & Build-A-Box Logic
+  modelUrl    String?  // .glb file path
+  volume      Int      @default(1) // Box ထဲမှာ နေရာဘယ်လောက်ယူလဲ
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  password  String
+  points    Int      @default(0) // Loyalty Points
+  orders    Order[]
+  createdAt DateTime @default(now())
+}
+
+model Order {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  total     Float
+  status    String   @default("PENDING")
+  createdAt DateTime @default(now())
+}
