@@ -22,18 +22,19 @@ const STUDIO_DATA: any = {
     ],
     images: {
       "5-red": [
-        "/images/studio/rose-5-red-s1.png",
-        "/images/studio/rose-5-red-s2.png",
-        "/images/studio/rose-5-red-s3.png",
-        "/images/studio/rose-5-red-s4.png",
-        "/images/studio/rose-5-red-s5.png",
+        "/images/F/R/RR5/1.png",
+        "/images/F/R/RR5/2.png",
+        "/images/F/R/RR5/3.png",
+        "/images/F/R/RR5/4.png",
+        "/images/F/R/RR5/5.png",
+        
       ],
       "6-red": [
-        "/images/studio/rose-5-red-s1.png",
-        "/images/studio/rose-5-red-s2.png",
-        "/images/studio/rose-5-red-s3.png",
-        "/images/studio/rose-5-red-s4.png",
-        "/images/studio/rose-5-red-s5.png",
+        "/images/F/R/RR6/1.png",
+        "/images/F/R/RR6/2.png",
+        "/images/F/R/RR6/3.png",
+        "/images/F/R/RR6/4.png",
+        "/images/F/R/RR6/5.png",
       ],
       "7-red": [
         "/images/studio/rose-5-red-s1.png",
@@ -64,18 +65,18 @@ const STUDIO_DATA: any = {
         "/images/red/10/10001.png",
       ],
       "5-yellow": [
-        "/images/studio/rose-5-red-s1.png",
-        "/images/studio/rose-5-red-s2.png",
-        "/images/studio/rose-5-red-s3.png",
-        "/images/studio/rose-5-red-s4.png",
-        "/images/studio/rose-5-red-s5.png",
+        "/images/F/R/RY5/1.png",
+        "/images/F/R/RY5/2.png",
+        "/images/F/R/RY5/3.png",
+        "/images/F/R/RY5/4.png",
+        "/images/F/R/RY5/5.png",
       ],
       "6-yellow": [
-        "/images/studio/rose-5-red-s1.png",
-        "/images/studio/rose-5-red-s2.png",
-        "/images/studio/rose-5-red-s3.png",
-        "/images/studio/rose-5-red-s4.png",
-        "/images/studio/rose-5-red-s5.png",
+        "/images/F/R/RY6/1.png",
+        "/images/F/R/RY6/2.png",
+        "/images/F/R/RY6/3.png",
+        "/images/F/R/RY6/4.png",
+        "/images/F/R/RY6/5.png",
       ],
       "7-yellow": [
         "/images/studio/rose-5-red-s1.png",
@@ -106,18 +107,18 @@ const STUDIO_DATA: any = {
         "/images/red/10/10001.png",
       ],
       "5-pink": [
-        "/images/studio/rose-5-red-s1.png",
-        "/images/studio/rose-5-red-s2.png",
-        "/images/studio/rose-5-red-s3.png",
-        "/images/studio/rose-5-red-s4.png",
-        "/images/studio/rose-5-red-s5.png",
+        "/images/F/R/RP5/1.png",
+        "/images/F/R/RP5/2.png",
+        "/images/F/R/RP5/3.png",
+        "/images/F/R/RP5/4.png",
+        "/images/F/R/RP5/5.png",
       ],
       "6-pink": [
-        "/images/studio/rose-5-red-s1.png",
-        "/images/studio/rose-5-red-s2.png",
-        "/images/studio/rose-5-red-s3.png",
-        "/images/studio/rose-5-red-s4.png",
-        "/images/studio/rose-5-red-s5.png",
+        "/images/F/R/RP6/1.png",
+        "/images/F/R/RP6/2.png",
+        "/images/F/R/RP6/3.png",
+        "/images/F/R/RP6/4.png",
+        "/images/F/R/RP6/5.png",
       ],
       "7-pink": [
         "/images/studio/rose-5-red-s1.png",
@@ -147,33 +148,144 @@ const STUDIO_DATA: any = {
         "/images/red/10/1001.jpg",
         "/images/red/10/10001.png",
       ],
+
+      
     }
   },
   lily: {
     name: "Elegant Lily",
     colors: [
       { id: "white", name: "Pure White", hex: "#F8FAFC" },
-      { id: "maroon", name: "Deep Maroon", hex: "#4C0519" },
-      { id: "whitepink", name: "White Pink Mix", hex: "#FFD1DC" },
+      { id: "pink", name: "Deep Maroon", hex: "#c746ad" },
+      { id: "red", name: "White Pink Mix", hex: "#d71442" },
     ],
     images: {
       "5-white": [
-        "/images/studio/lily-5-white-s1.png", "/images/studio/lily-5-white-s2.png"
+        "/images/F/L/LW5/1.png",
+        "/images/F/L/LW5/2.png",
+        "/images/F/L/LW5/3.png",
+        "/images/F/L/LW5/4.png",
+        "/images/F/L/LW5/5.png", 
       ],
       "6-white": [
-        "/images/studio/lily-5-white-s1.png", "/images/studio/lily-5-white-s2.png"
+        "/images/F/L/LW6/1.png",
+        "/images/F/L/LW6/2.png",
+        "/images/F/L/LW6/3.png",
+        "/images/F/L/LW6/4.png",
+        "/images/F/L/LW6/5.png", 
       ],
       "7-white": [
-        "/images/studio/lily-5-white-s1.png", "/images/studio/lily-5-white-s2.png"
+        "/images/F/L/LW5/1.png",
+        "/images/F/L/LW5/2.png",
+        "/images/F/L/LW5/3.png",
+        "/images/F/L/LW5/4.png",
+        "/images/F/L/LW5/5.png", 
       ],
       "8-white": [
-        "/images/studio/lily-5-white-s1.png", "/images/studio/lily-5-white-s2.png"
+        "/images/F/L/LW5/1.png",
+        "/images/F/L/LW5/2.png",
+        "/images/F/L/LW5/3.png",
+        "/images/F/L/LW5/4.png",
+        "/images/F/L/LW5/5.png", 
       ],
       "9-white": [
-        "/images/studio/lily-5-white-s1.png", "/images/studio/lily-5-white-s2.png"
+        "/images/F/L/LW5/1.png",
+        "/images/F/L/LW5/2.png",
+        "/images/F/L/LW5/3.png",
+        "/images/F/L/LW5/4.png",
+        "/images/F/L/LW5/5.png", 
       ],
       "10-white": [
-        "/images/studio/lily-5-white-s1.png", "/images/studio/lily-5-white-s2.png"
+        "/images/F/L/LW5/1.png",
+        "/images/F/L/LW5/2.png",
+        "/images/F/L/LW5/3.png",
+        "/images/F/L/LW5/4.png",
+        "/images/F/L/LW5/5.png", 
+      ],
+      "5-pink": [
+        "/images/F/L/LP5/1.png",
+        "/images/F/L/LP5/2.png",
+        "/images/F/L/LP5/3.png",
+        "/images/F/L/LP5/4.png",
+        "/images/F/L/LP5/5.png", 
+      ],
+      "6-pink": [
+        "/images/F/L/LP6/1.png",
+        "/images/F/L/LP6/2.png",
+        "/images/F/L/LP6/3.png",
+        "/images/F/L/LP6/4.png",
+        "/images/F/L/LP6/5.png", 
+      ],
+      "7-pink": [
+        "/images/F/L/LW5/1.png",
+        "/images/F/L/LW5/2.png",
+        "/images/F/L/LW5/3.png",
+        "/images/F/L/LW5/4.png",
+        "/images/F/L/LW5/5.png", 
+      ],
+      "8-pink": [
+        "/images/F/L/LW5/1.png",
+        "/images/F/L/LW5/2.png",
+        "/images/F/L/LW5/3.png",
+        "/images/F/L/LW5/4.png",
+        "/images/F/L/LW5/5.png", 
+      ],
+      "9-pink": [
+        "/images/F/L/LW5/1.png",
+        "/images/F/L/LW5/2.png",
+        "/images/F/L/LW5/3.png",
+        "/images/F/L/LW5/4.png",
+        "/images/F/L/LW5/5.png", 
+      ],
+      "10-pink": [
+        "/images/F/L/LW5/1.png",
+        "/images/F/L/LW5/2.png",
+        "/images/F/L/LW5/3.png",
+        "/images/F/L/LW5/4.png",
+        "/images/F/L/LW5/5.png", 
+      ],
+      "5-red": [
+        "/images/F/L/LR5/1.png",
+        "/images/F/L/LR5/2.png",
+        "/images/F/L/LR5/3.png",
+        "/images/F/L/LR5/4.png",
+        "/images/F/L/LR5/5.png",
+        
+      ],
+      "6-red": [
+        "/images/F/L/LR6/1.png",
+        "/images/F/L/LR6/2.png",
+        "/images/F/L/LR6/3.png",
+        "/images/F/L/LR6/4.png",
+        "/images/F/L/LR6/5.png",
+      ],
+      "7-red": [
+        "/images/studio/rose-5-red-s1.png",
+        "/images/studio/rose-5-red-s2.png",
+        "/images/studio/rose-5-red-s3.png",
+        "/images/studio/rose-5-red-s4.png",
+        "/images/studio/rose-5-red-s5.png",
+      ],
+      "8-red": [
+        "/images/red/8/8.jpg",
+        "/images/red/8/81.jpg",
+        "/images/studio/rose-5-red-s3.png",
+        "/images/studio/rose-5-red-s4.png",
+        "/images/studio/rose-5-red-s5.png",
+      ],
+      "9-red": [
+        "/images/red/9/9.jpg",
+        "/images/red/9/91.jpg",
+        "/images/",
+        "/images/",
+        "/images/",
+      ],
+      "10-red": [
+        "/images/red/10/10.jpg",
+        "/images/red/10/101.jpg",
+        "/images/red/10/102.jpg",
+        "/images/red/10/1001.jpg",
+        "/images/red/10/10001.png",
       ],
     }
   },
@@ -182,9 +294,89 @@ const STUDIO_DATA: any = {
     colors: [
       { id: "pink", name: "Lotus Pink", hex: "#FBCFE8" },
       { id: "white", name: "Sacred White", hex: "#FFFFFF" },
+      { id: "purple", name: "Sacred White", hex: "#e95dc3" },
     ],
     images: {
-      "5-pink": ["/images/studio/lotus-5-pink-s1.png", "/images/studio/lotus-5-pink-s2.png"],
+      "5-pink": [
+        "/images/F/Lo/LotusP5/1.png",
+        "/images/F/Lo/LotusP5/2.png",
+        "/images/F/Lo/LotusP5/3.png",
+        "/images/F/Lo/LotusP5/4.png",
+        "/images/F/Lo/LotusP5/5.png",
+      ],
+      "6-pink": [
+        "/images/F/Lo/LotusP6/1.png",
+        "/images/F/Lo/LotusP6/2.png",
+        "/images/F/Lo/LotusP6/3.png",
+        "/images/F/Lo/LotusP6/4.png",
+        "/images/F/Lo/LotusP6/5.png",
+      ],
+      "7-pink": [
+        
+      ],
+      "8-pink": [
+        
+      ],
+      "9-pink": [
+        
+      ],
+      "10-pink": [
+        
+      ],
+      "5-white": [
+        "/images/F/Lo/LotusW5/1.png",
+        "/images/F/Lo/LotusW5/2.png",
+        "/images/F/Lo/LotusW5/3.png",
+        "/images/F/Lo/LotusW5/4.png",
+        "/images/F/Lo/LotusW5/5.png",
+      ],
+      "6-white": [
+        "/images/F/Lo/LotusW6/1.png",
+        "/images/F/Lo/LotusW6/2.png",
+        "/images/F/Lo/LotusW6/3.png",
+        "/images/F/Lo/LotusW6/4.png",
+        "/images/F/Lo/LotusPW/5.png",
+      ],
+      "7-white": [
+        
+      ],
+      "8-white": [
+        
+      ],
+      "9-white": [
+        
+      ],
+      "10-white": [
+        
+      ],
+      "5-purple": [
+        "/images/F/Lo/Purple Lotus 5/1.png",
+        "/images/F/Lo/Purple Lotus 5/2.png",
+        "/images/F/Lo/Purple Lotus 5/3.png",
+        "/images/F/Lo/Purple Lotus 5/4.png",
+        "/images/F/Lo/Purple Lotus 5/5.png",
+      ],
+      "6-purple": [
+        "/images/F/Lo/Purple Lotus 6/1.png",
+        "/images/F/Lo/Purple Lotus 6/2.png",
+        "/images/F/Lo/Purple Lotus 6/3.png",
+        "/images/F/Lo/Purple Lotus 6/4.png",
+        "/images/F/Lo/Purple Lotus 6/5.png",
+      ],
+      "7-purple": [
+        
+      ],
+      "8-purple": [
+        
+      ],
+      "9-purple": [
+        
+      ],
+      "10-white": [
+        
+      ],
+
+    
     }
   }
 };
@@ -256,7 +448,7 @@ export default function StudioPage() {
       `}} />
 
       {/* --- ✨ BLING LAYER --- */}
-      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+      {/* <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
         {[...Array(60)].map((_, i) => {
           const rand = Math.random();
           let color = rand > 0.6 ? "#F5ABE4" : rand > 0.3 ? "#2C2926" : "#FFFFFF";
@@ -280,7 +472,7 @@ export default function StudioPage() {
             />
           );
         })}
-      </div>
+      </div> */}
 
       <div className="relative z-10 w-full text-[#2C2926] pt-32 font-sans pb-20">
         {/* Success Notification Toast */}

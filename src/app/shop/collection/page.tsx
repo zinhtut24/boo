@@ -110,6 +110,39 @@ export default function ShopPage() {
     });
   }, [activeCategory, activeStatus, searchQuery]);
 
+const FloatingHeartsBackground = () => (
+    <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+      {/* 💡 အရေအတွက်ကို ၁၅ ခုပဲ ထားလိုက်ပါသည် */}
+      {[...Array(20)].map((_, i) => {
+        const pinkShades = ["#FFB6C1", "#FF69B4", "#FFC0CB", "#F5ABE4"];
+        const color = pinkShades[i % pinkShades.length];
+        const size = Math.random() * 10 + 9; // အရွယ်အစားကိုလည်း နည်းနည်းလေး ပိုသေးလိုက်ပါတယ်
+        return (
+          <motion.div
+            key={`heart-${i}`}
+            className="absolute"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              filter: "drop-shadow(0 0 5px rgba(255, 105, 180, 0.3))"
+            }}
+            animate={{
+              y: [0, -80, 0], // အတက်အဆင်းကိုလည်း နည်းနည်းလျှော့ထားသည်
+              opacity: [0, 0.8, 0], // အမြဲလင်းမနေဘဲ ဖျတ်ခနဲ ပေါ်လာရုံပဲ ထားသည်
+              scale: [0.6, 1, 0.6],
+            }}
+            transition={{ 
+              duration: Math.random() * 5 + 7, // ပိုနှေးနှေးလေး သွားစေရန်
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          >
+            <Heart size={size} fill={color} stroke="none" />
+          </motion.div>
+        );
+      })}
+    </div>
+  );
   if (!mounted) return null;
 
   return (
@@ -130,7 +163,7 @@ export default function ShopPage() {
       `}} />
 
       {/* --- ✨ BLING LAYER --- */}
-      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+      {/* <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
         {[...Array(60)].map((_, i) => {
           const rand = Math.random();
           let color = rand > 0.6 ? "#F5ABE4" : rand > 0.3 ? "#2C2926" : "#FFFFFF";
@@ -147,7 +180,7 @@ export default function ShopPage() {
             />
           );
         })}
-      </div>
+      </div> */}
 
       <div className="relative z-10 w-full text-[#2C2926]">
         
@@ -170,6 +203,8 @@ export default function ShopPage() {
         </AnimatePresence>
 
         <header className="pt-32 pb-8 bg-white/30 backdrop-blur-xl border-b border-white/20">
+        <FloatingHeartsBackground /> 
+
           <div className="container mx-auto px-10 max-w-[1600px]">
             <div className="flex flex-col lg:flex-row justify-between items-center gap-8">
               <div className="text-center lg:text-left">

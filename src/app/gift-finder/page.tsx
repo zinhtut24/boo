@@ -123,7 +123,7 @@ export default function GiftFinderPage() {
       `}} />
 
       {/* --- ✨ BLING LAYER --- */}
-      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+      {/* <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
         {[...Array(60)].map((_, i) => {
           const rand = Math.random();
           let color = rand > 0.6 ? "#F5ABE4" : rand > 0.3 ? "#2C2926" : "#FFFFFF";
@@ -147,7 +147,7 @@ export default function GiftFinderPage() {
             />
           );
         })}
-      </div>
+      </div> */}
 
       <div className="relative z-10 w-full text-[#2C2926]">
         <div className="container mx-auto px-6 pt-40 pb-32 max-w-5xl">

@@ -22,3 +22,7 @@
   background-size: 400% 400% !important;
   animation: dynamicFlow 10s ease infinite !important;
 }
+
+[key^="bling-"], .bling-layer {
+  display: none !important;
+}

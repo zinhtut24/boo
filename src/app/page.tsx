@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { 
   ArrowRight, Play, ChevronRight, Sparkles, 
-  Truck, ShieldCheck, Star, ChevronLeft 
+  Truck, ShieldCheck, Star, ChevronLeft, Heart 
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Product3D from "@/components/canvas/product3D";
@@ -14,6 +14,9 @@ export default function Home() {
   const [mounted, setMounted] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [activeBouquet, setActiveBouquet] = useState(0);
+  
+  // 💡 Sticker Interaction
+  const [stickerMessage, setStickerMessage] = useState<string | null>(null);
 
   const bouquetImages = [
     "/images/Flowers/Rose/download (6).png",
@@ -32,6 +35,45 @@ export default function Home() {
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
+
+  const handleStickerClick = (msg: string) => {
+    setStickerMessage(msg);
+    setTimeout(() => setStickerMessage(null), 2500); 
+  };
+
+const FloatingHeartsBackground = () => (
+    <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+      {/* 💡 အရေအတွက်ကို ၁၅ ခုပဲ ထားလိုက်ပါသည် */}
+      {[...Array(16)].map((_, i) => {
+        const pinkShades = ["#FFB6C1", "#FF69B4", "#FFC0CB", "#F5ABE4"];
+        const color = pinkShades[i % pinkShades.length];
+        const size = Math.random() * 9 + 9; // အရွယ်အစားကိုလည်း နည်းနည်းလေး ပိုသေးလိုက်ပါတယ်
+        return (
+          <motion.div
+            key={`heart-${i}`}
+            className="absolute"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              filter: "drop-shadow(0 0 5px rgba(255, 105, 180, 0.3))"
+            }}
+            animate={{
+              y: [0, -80, 0], // အတက်အဆင်းကိုလည်း နည်းနည်းလျှော့ထားသည်
+              opacity: [0, 0.7, 0], // အမြဲလင်းမနေဘဲ ဖျတ်ခနဲ ပေါ်လာရုံပဲ ထားသည်
+              scale: [0.6, 1, 0.6],
+            }}
+            transition={{ 
+              duration: Math.random() * 5 + 7, // ပိုနှေးနှေးလေး သွားစေရန်
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          >
+            <Heart size={size} fill={color} stroke="none" />
+          </motion.div>
+        );
+      })}
+    </div>
+  );
 
   if (!mounted) return <div className="min-h-screen bg-[#FCFBFA]" />;
 
@@ -58,7 +100,7 @@ export default function Home() {
           50% { background-position: 100% 50%; }
           100% { background-position: 0% 50%; }
         }
-        ::selection { background-color: #D09478; color: white; }
+        ::selection { background-color: #ef9adb; color: white; }
       `}} />
 
       {/* --- ✨ INTERACTIVE SPARKLE TRAIL --- */}
@@ -68,48 +110,81 @@ export default function Home() {
         transition={{ type: "spring", damping: 20, stiffness: 200, mass: 0.5 }}
       />
 
-      {/* --- ✨ BLING LAYER --- */}
-      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-        {[...Array(80)].map((_, i) => {
-          const rand = Math.random();
-          let color = rand > 0.6 ? "#F5ABE4" : rand > 0.3 ? "#2C2926" : "#FFFFFF";
+      
+      {/* --- ❤️ VIBRANT PINK FLOATING HEARTS LAYER --- */}
+      {/* <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+        {[...Array(35)].map((_, i) => {
+          // အသဲပုံအရောင်များကို Pink shades များထဲမှ ရွေးချယ်မည်
+          const pinkShades = ["#FFB6C1", "#FF69B4", "#FFC0CB", "#F5ABE4"];
+          const color = pinkShades[i % pinkShades.length];
+          const size = Math.random() * 15 + 10; // အရွယ်အစားကို ပိုသိသာအောင် မြှင့်ထားသည်
+          
           return (
             <motion.div
-              key={`bling-${i}`}
-              className="absolute rounded-full"
+              key={`heart-${i}`}
+              className="absolute"
               style={{
                 left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                width: "2px",
-                height: "2px",
-                backgroundColor: color,
-                boxShadow: `0 0 8px ${color}`,
+                top: `${Math.random() * 110}%`,
+                filter: "drop-shadow(0 0 5px rgba(255, 105, 180, 0.3))" // Pink Glow ထည့်ထားသည်
               }}
               animate={{
-                y: [0, Math.random() * -100, 0],
-                opacity: [0.1, 0.6, 0.1],
-                scale: [1, 1.3, 1],
+                y: [0, -150, 0],
+                x: [0, Math.random() * 50 - 25, 0],
+                opacity: [0, 0.6, 0], // ပိုမြင်သာအောင် 0.6 အထိ တင်ထားသည်
+                scale: [0.6, 1.3, 0.6],
+                rotate: [0, 45, -45, 0]
               }}
-              transition={{ duration: Math.random() * 8 + 5, repeat: Infinity }}
-            />
+              transition={{ 
+                duration: Math.random() * 12 + 10, 
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            >
+              <Heart size={size} fill={color} stroke="none" />
+            </motion.div>
           );
         })}
-      </div>
+      </div> */}
 
       <div className="relative z-10 w-full text-[#2C2926]">
         
         {/* 1. HERO SECTION */}
         <section className="relative min-h-screen flex flex-col items-center justify-center px-6">
-          <motion.img 
-            src="/images/bubu1.png" 
-            className="absolute w-24 md:w-32 left-[5%] top-[20%] pointer-events-auto z-20" 
-            whileHover={{ rotate: [0, -10, 10, 0], scale: 1.1 }} 
-          />
-          <motion.img 
-            src="/images/bubu2.gif" 
-            className="absolute w-20 md:w-28 right-[5%] top-[25%] pointer-events-auto z-20 opacity-80" 
-            whileTap={{ scale: 0.9 }} 
-          />
+          <FloatingHeartsBackground /> {/* 💡 Section 2 နောက်ခံအသဲပုံ */}
+          {/* 🧸 Interactive Sticker Left (Bubu) */}
+          <motion.div 
+            className="absolute left-[5%] top-[20%] z-20 cursor-pointer flex flex-col items-center"
+            onClick={() => handleStickerClick("Hello Bubu! Do you love me? ✨")}
+          >
+            <motion.img 
+              src="/images/bubu1.png" 
+              className="w-16 md:w-32 lg:w-40 pointer-events-auto" 
+              whileHover={{ rotate: -15, scale: 1.1 }} 
+            />
+            <AnimatePresence>
+              {stickerMessage?.includes("Bubu") && (
+                <motion.span initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="mt-2 text-[10px] font-bold uppercase tracking-widest text-white bg-[#D09478] px-4 py-1.5 rounded-full shadow-lg whitespace-nowrap">{stickerMessage}</motion.span>
+              )}
+            </AnimatePresence>
+          </motion.div>
+
+          {/* 🧸 Interactive Sticker Right (Dudu) */}
+          <motion.div 
+            className="absolute right-[5%] top-[25%] z-20 cursor-pointer flex flex-col items-center"
+            onClick={() => handleStickerClick("I love you. DuDu! 💖")}
+          >
+            <motion.img 
+              src="/images/dudu1.png" 
+              className="w-16 md:w-28 lg:w-36 pointer-events-auto opacity-80" 
+              whileTap={{ scale: 0.9 }} 
+            />
+            <AnimatePresence>
+              {stickerMessage?.includes("Dudu") && (
+                <motion.span initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="mt-2 text-[10px] font-bold uppercase tracking-widest text-white bg-[#2C2926] px-4 py-1.5 rounded-full shadow-lg whitespace-nowrap">{stickerMessage}</motion.span>
+              )}
+            </AnimatePresence>
+          </motion.div>
 
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ staggerChildren: 0.2 }} className="container max-w-6xl text-center space-y-10">
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="flex items-center justify-center gap-4">
@@ -122,7 +197,7 @@ export default function Home() {
               Art of <br /> <span className="italic font-light text-[#D09478]">Memories.</span>
             </motion.h1>
 
-            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }} className="text-base md:text-xl max-w-xl mx-auto font-light leading-relaxed opacity-80">
+            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }} className="text-base md:text-xl max-w-xl mx-auto font-light leading-relaxed opacity-80 px-4">
               Where luxury flowers, couture plushies, and the iconic Boo Blind Box converge to create unforgettable memories.
             </motion.p>
 
@@ -131,11 +206,11 @@ export default function Home() {
                 Explore Shop <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
 
-              {/* 💡 --- RUNNING BUBU DUDU (No Line Edition) --- 💡 */}
+              
               <div className="relative w-full h-20 flex items-center overflow-visible">
                 <motion.div 
                   className="absolute flex items-center"
-                  animate={{ x: ["-10vw", "100vw", "-10vw"] }}
+                  animate={{ x: ["-20vw", "100vw", "-20vw"] }}
                   transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
                 >
                   <motion.div
@@ -143,8 +218,7 @@ export default function Home() {
                     animate={{ scaleX: [1, 1, -1, -1, 1] }}
                     transition={{ duration: 18, repeat: Infinity, times: [0, 0.48, 0.5, 0.98, 1] }}
                   >
-                    <img src="/images/budurun.gif" className="w-20 md:w-28 drop-shadow-xl" alt="Running" />
-                    <div className="w-10 h-1.5 bg-black/5 rounded-full blur-sm mt-1" />
+                    <img src="/images/budurun.gif" className="w-16 md:w-24 drop-shadow-xl" alt="Running" />
                   </motion.div>
                 </motion.div>
               </div>
@@ -155,12 +229,13 @@ export default function Home() {
         {/* 2. TRUST INDICATORS */}
         <section className="bg-white/40 py-20 border-y border-white/40 backdrop-blur-xl relative">
           <div className="container mx-auto px-6 max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-16 text-center">
+            
             {[
               { icon: <Truck />, title: "Curated Delivery", desc: "Yangon-wide premium shipping" },
               { icon: <ShieldCheck />, title: "Bespoke Quality", desc: "Global artisanal sourcing" },
               { icon: <Star />, title: "Luxury Standard", desc: "Handcrafted creative vision" }
             ].map((item, idx) => (
-              <motion.div key={`trust-${idx}`} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: idx * 0.15 }} whileHover={{ y: -8 }} className="group flex flex-col items-center cursor-default">
+              <motion.div key={`trust-${idx}`} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: idx * 0.15 }} whileHover={{ y: -8 }} className="group flex flex-col items-center cursor-default px-4">
                 <div className="text-[#A09080] p-5 bg-white/60 rounded-full mb-5 shadow-sm border border-white/40 transition-all duration-500 group-hover:bg-[#A09080] group-hover:text-white group-hover:shadow-lg group-hover:scale-110">
                   {item.icon}
                 </div>
@@ -174,6 +249,7 @@ export default function Home() {
         {/* 3. 3D STUDIO PREVIEW */}
         <section className="py-32 relative">
           <div className="container mx-auto px-6 max-w-7xl grid md:grid-cols-2 items-center gap-20">
+            <FloatingHeartsBackground />
             <div className="relative group">
               <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 1 }} className="relative aspect-square bg-white/40 rounded-[4rem] border border-white/60 shadow-2xl flex items-center justify-center overflow-hidden backdrop-blur-md">
                 <AnimatePresence mode="wait">
@@ -183,25 +259,25 @@ export default function Home() {
                 <button onClick={nextBouquet} className="absolute right-6 w-12 h-12 rounded-full bg-white/30 backdrop-blur-md border border-white/40 flex items-center justify-center hover:bg-white transition-all opacity-0 group-hover:opacity-100"><ChevronRight className="w-6 h-6 text-[#2C2926]" /></button>
               </motion.div>
             </div>
-            <div className="space-y-8">
-              <h2 className="text-6xl md:text-8xl font-serif text-[#2C2926]">Masterpiece <span className="italic font-light text-[#D09478]">Studio.</span></h2>
-              <p className="text-lg text-[#2C2926]/70 leading-relaxed font-light italic border-l-4 border-[#D09478]/40 pl-8">Every flower has a story; every gift is a memory. Create your own luxury floral arrangement in our real-time studio—where your imagination becomes a reality.</p>
+            <div className="space-y-8 px-4">
+              <h2 className="text-5xl md:text-8xl font-serif text-[#2C2926]">Masterpiece <span className="italic font-light text-[#D09478]">Studio.</span></h2>
+              <p className="text-base md:text-lg text-[#2C2926]/70 leading-relaxed font-light italic border-l-4 border-[#D09478]/40 pl-8">Every flower has a story; every gift is a memory. Create your own luxury floral arrangement in our real-time studio—where your imagination becomes a reality.</p>
               <Link href="/studio" className="inline-flex items-center gap-4 bg-[#2C2926] text-white px-12 py-5 rounded-full font-bold uppercase tracking-widest text-[11px] hover:bg-[#D09478] transition-all shadow-xl">Launch Studio <ChevronRight className="w-4 h-4" /></Link>
             </div>
           </div>
         </section>
 
         {/* 4. COLLECTIONS SECTION */}
-        <section className="py-32 bg-white/10 backdrop-blur-md">
+        <section className="py-32 bg-white/10 backdrop-blur-md relative">
           <div className="container mx-auto px-6 max-w-7xl">
-            <div className="flex justify-between items-end mb-16">
+            <div className="flex justify-between items-end mb-16 px-4">
               <div>
                 <h2 className="text-4xl font-serif text-[#2C2926]">Curated Universe</h2>
                 <p className="text-[#A09080] text-[10px] uppercase tracking-[0.4em] font-bold mt-2">Signature Collections</p>
               </div>
               <Link href="/shop/collection" className="text-[10px] font-bold uppercase tracking-widest border-b-2 border-[#2C2926] pb-1 hover:text-[#D09478] hover:border-[#D09478] transition-all">Browse All</Link>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 px-4">
               {collections.map((item) => (
                 <Link key={item.id} href={item.link}>
                   <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} whileHover={{ y: -10 }} className="group cursor-pointer space-y-4 text-center relative">
@@ -218,8 +294,27 @@ export default function Home() {
           </div>
         </section>
 
+        
+        <div className="relative w-full h-24 flex items-center overflow-visible bg-white/10 backdrop-blur-sm border-y border-white/20">
+        <FloatingHeartsBackground /> 
+          <motion.div 
+            className="absolute flex items-center"
+            animate={{ x: ["100vw", "-20vw", "100vw"] }} 
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          >
+            <motion.div
+              className="flex flex-col items-center"
+              animate={{ scaleX: [1, 1, -1, -1] }}
+              transition={{ duration: 20, repeat: Infinity, times: [0, 0.49, 0.5, 1] }}
+            >
+              <img src="/images/budu.gif" className="w-16 md:w-28 drop-shadow-xl" alt="Running 2" />
+              <div className="text-[10px] font-bold text-[#D09478] uppercase mt-1 tracking-tighter"></div>
+            </motion.div>
+          </motion.div>
+        </div>
+
         {/* 5. COLLABORATION SECTION */}
-        <section className="py-24 bg-white/20 backdrop-blur-xl border-t border-white/30 relative">
+        <section className="py-24 bg-white/20 backdrop-blur-xl relative">
           <div className="container mx-auto px-6 max-w-6xl text-center">
             <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="space-y-4 mb-16">
               <h3 className="text-[10px] tracking-[0.6em] uppercase text-[#2C2926]/60 font-bold">The Boo Circle</h3>
