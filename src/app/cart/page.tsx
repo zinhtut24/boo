@@ -30,7 +30,6 @@ export default function CartPage() {
     wave: "/images/wave-qr.jpg",  
   };
 
-  // 💡 Upload လုပ်လိုက်တဲ့ ပုံကို ချက်ချင်း ပြသရန် State
   const [previewImage, setPreviewImage] = useState<string | null>(null);
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -99,7 +98,6 @@ export default function CartPage() {
     >
       <style dangerouslySetInnerHTML={{ __html: `@keyframes bgFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }` }} />
 
-      {/* --- ✨ BLING LAYER --- */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         {[...Array(40)].map((_, i) => (
           <motion.div
@@ -118,7 +116,6 @@ export default function CartPage() {
         ))}
       </div>
 
-      {/* --- 🧸 BUBU DUDU STICKERS --- */}
       <motion.img src="/images/bubu1.png" className="fixed top-24 left-[2%] w-24 md:w-32 opacity-20 pointer-events-none z-0 hidden lg:block" animate={{ y: [0, -15, 0], rotate: [0, 5, 0] }} transition={{ duration: 6, repeat: Infinity }} />
       <motion.img src="/images/bubududu1.png" className="fixed bottom-10 right-[2%] w-32 md:w-40 opacity-20 pointer-events-none z-0 hidden lg:block" animate={{ y: [0, 15, 0], rotate: [0, -5, 0] }} transition={{ duration: 7, repeat: Infinity }} />
 
@@ -154,11 +151,10 @@ export default function CartPage() {
                      <div className="absolute -right-4 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/20 rounded-full" />
                      <img src="/images/bubu1.png" className="absolute top-2 left-4 w-12 h-12 rotate-[-15deg] drop-shadow-lg" alt="" />
                      <h3 className="text-xl font-serif italic">Boo Gift Voucher</h3>
-                      <img src="/images/bubududu1.png" className="absolute bottom-4 right-4 w-16 h-16 opacity-80" alt="" />
+                     <img src="/images/bubududu1.png" className="absolute bottom-4 right-4 w-16 h-16 opacity-80" alt="" />
                      <p className="text-[9px] text-gray-400 uppercase tracking-[0.3em] mt-2">ID: {orderId}</p>
                   </div>
                   <div className="p-8 space-y-4 relative">
-                   
                     <div className="flex justify-between text-[10px] font-bold uppercase tracking-widest text-gray-400">
                       <span>Recipient</span><span className="text-[#2C2926]">{fullName}</span>
                     </div>
@@ -257,13 +253,25 @@ export default function CartPage() {
 
                       <div className="bg-white/40 backdrop-blur-xl p-8 rounded-[2.5rem] border border-white/60 shadow-sm space-y-6">
                         <h2 className="text-xl font-serif italic">Payment method</h2>
-                        <div className="flex bg-white/60 p-1.5 rounded-2xl border border-white/40 w-full sm:w-fit shadow-inner">
+                        
+                        {/* 💡 အခုနေရာတွင် flex-nowrap ကိုသုံးပြီး Button များကို တစ်ကြောင်းတည်းရှိနေအောင် ညှိထားပါသည် */}
+                        <div className="flex flex-nowrap bg-white/60 p-1.5 rounded-2xl border border-white/40 w-full overflow-x-hidden shadow-inner">
                           {["kpay", "wave", "card"].map((id) => (
-                            <button key={id} onClick={() => setSelectedPayment(id)} className={cn("px-8 py-3 rounded-xl text-[11px] font-bold uppercase tracking-widest transition-all whitespace-nowrap mx-0.5", selectedPayment === id ? "bg-[#2C2926] text-white shadow-md scale-[1.02]" : "text-gray-400 hover:text-[#2C2926]")}>
+                            <button 
+                              key={id} 
+                              onClick={() => setSelectedPayment(id)} 
+                              className={cn(
+                                "flex-1 py-3 rounded-xl transition-all whitespace-nowrap px-1",
+                                // 💡 text size ကို screen သေးလျှင် ပိုသေးသွားအောင် ညှိထားပါသည်
+                                "text-[7.5px] min-[380px]:text-[9px] min-[450px]:text-[11px] font-bold uppercase tracking-tighter sm:tracking-widest",
+                                selectedPayment === id ? "bg-[#2C2926] text-white shadow-md scale-[1.02]" : "text-gray-400 hover:text-[#2C2926]"
+                              )}
+                            >
                               {id === "card" ? "Card Pay" : id === "wave" ? "WavePay" : "KBZ Pay"}
                             </button>
                           ))}
                         </div>
+
                         <div className="pt-2">
                           {selectedPayment === "card" ? (
                             <div className="space-y-4 animate-in fade-in duration-500">
@@ -282,12 +290,10 @@ export default function CartPage() {
                             </div>
                           ) : (
                             <div className="flex flex-col items-center space-y-5 py-2 animate-in fade-in duration-500">
-                              {/* 💡 ဒီနေရာတွင် KBZ သို့မဟုတ် Wave ပေါ်မူတည်ပြီး QR ပုံပြောင်းပါမည် */}
                               <div className="bg-white p-3 rounded-2xl border-2 border-dashed border-[#A09080]/20">
                                 <img src={qrImages[selectedPayment]} className="w-36 h-36 object-contain" alt="Payment QR" />
                               </div>
                               
-                              {/* 💡 Screenshot Upload & Preview Logic */}
                               {previewImage ? (
                                 <div className="relative w-full max-w-xs aspect-video rounded-2xl overflow-hidden border border-white/60 shadow-lg group">
                                   <img src={previewImage} className="w-full h-full object-cover" alt="Payment Preview" />
