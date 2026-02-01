@@ -35,7 +35,7 @@ const PRODUCTS = [
   { id: "bb-1", name: "Nommi V1", price: 45000, category: "Blind Box", status: "Pre-order", img: "/images/Blindbox/nomiv1/nomiv1.png" },
   { id: "bb-2", name: "Nommi V6", price: 60000, category: "Blind Box", status: "Pre-order", img: "/images/Blindbox/nomiv6/nomi_v6.png" },
   { id: "bb-3", name: "Nommi V7", price: 63000, category: "Blind Box", status: "Pre-order", img: "/images/Blindbox/nomi7/nomi_v7.png" },
-  { id: "bb-4", name: "Nommi V8", price: 47000, category: "Blind Box", status: "Pre-order", img: "/images/Blindbox/nomiv9/Nomi_v8.png" },
+  { id: "bb-4", name: "Nommi V8", price: 47000, category: "Blind Box", status: "Pre-order", img: "/images/Blindbox/nomiv9/nomi_v8.png" },
   { id: "bb-5", name: "Skullpanda", price: 85000, category: "Blind Box", status: "Pre-order", img: "/images/Blindbox/skullpanda2/skullpanda2.png" },
   { id: "bb-6", name: "Crybaby", price: 75000, category: "Blind Box", status: "Pre-order", img: "/images/Blindbox/crybaby/crybaby1.png" },
   { id: "bb-7", name: "Lapupu", price: 125000, category: "Blind Box", status: "Pre-order", img: "/images/Blindbox/lapupu1/lapupu1.png" },
@@ -60,11 +60,11 @@ const PRODUCTS = [
   { id: "bg-9", name: "YSL", price: 11000000, category: "Bag", status: "Pre-order", img: "/images/Img/Bags/YSL.png" },
 
   // --- Chocolate ---
-  { id: "ch-1", name: "Cake Chocolate", price: 15000, category: "Chocolate", status: "New Arrivals", img: "/images/chocolate/Cake Chocolate/1.png" },
-  { id: "ch-2", name: "Dubai Chocolate", price: 15000, category: "Chocolate", status: "Pre-order", img: "/images/chocolate/Dubai Chocolate/2.png" },
-  { id: "ch-3", name: "Marshmallows Chocolate", price: 15000, category: "Chocolate", status: "New Arrivals", img: "/images/chocolate/Marshmallows Chocolate/1.png" },
-  { id: "ch-4", name: "Strawberry Fruit Chocolate", price: 15000, category: "Chocolate", status: "New Arrivals", img: "/images/chocolate/Strawberry Fruit Chocolate/3.png" },
-  { id: "ch-5", name: "Valitine Chocolate", price: 15000, category: "Chocolate", status: "New Arrivals", img: "/images/chocolate/Valitine Chocolate/1.png" },
+  { id: "ch-1", name: "Cake Chocolate", price: 25000, category: "Chocolate", status: "New Arrivals", img: "/images/chocolate/Cake Chocolate/1.png" },
+  { id: "ch-2", name: "Dubai Chocolate", price: 35000, category: "Chocolate", status: "Pre-order", img: "/images/chocolate/Dubai Chocolate/2.png" },
+  { id: "ch-3", name: "Marshmallows Chocolate", price: 45000, category: "Chocolate", status: "New Arrivals", img: "/images/chocolate/Marshmallows Chocolate/1.png" },
+  { id: "ch-4", name: "Strawberry Fruit Chocolate", price: 55000, category: "Chocolate", status: "New Arrivals", img: "/images/chocolate/Strawberry Fruit Chocolate/3.png" },
+  { id: "ch-5", name: "Valitine Chocolate", price: 20000, category: "Chocolate", status: "New Arrivals", img: "/images/chocolate/Valitine Chocolate/1.png" },
 ];
 
 export default function ShopPage() {

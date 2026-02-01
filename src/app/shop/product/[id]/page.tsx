@@ -510,7 +510,7 @@ const ALL_PRODUCTS = [
 { 
     id: "ch-1", 
     name: "Cake Chocolate", 
-    price: 15000, 
+    price: 25000, 
     category: "Chocolate", 
     status: "New Arrivals", 
     img: "/images/chocolate/Cake Chocolate/1.png",
@@ -525,7 +525,7 @@ const ALL_PRODUCTS = [
   { 
     id: "ch-2", 
     name: "Dubai Chocolate", 
-    price: 15000, 
+    price: 35000, 
     category: "Chocolate", 
     status: "Pre-order", 
     img: "/images/chocolate/Dubai Chocolate/2.png",
@@ -541,7 +541,7 @@ const ALL_PRODUCTS = [
   { 
     id: "ch-3", 
     name: "Marshmallows Chocolate", 
-    price: 15000, 
+    price: 45000, 
     category: "Chocolate", 
     status: "New Arrivals", 
     img: "/images/chocolate/Marshmallows Chocolate/1.png",
@@ -555,7 +555,7 @@ const ALL_PRODUCTS = [
   { 
     id: "ch-4", 
     name: "Strawberry Fruit Chocolate", 
-    price: 15000, 
+    price: 55000, 
     category: "Chocolate", 
     status: "New Arrivals", 
     img: "/images/chocolate/Strawberry Fruit Chocolate/3.png",
@@ -570,7 +570,7 @@ const ALL_PRODUCTS = [
   { 
     id: "ch-5", 
     name: "Valentine Chocolate", 
-    price: 15000, 
+    price: 20000, 
     category: "Chocolate", 
     status: "New Arrivals", 
     img: "/images/chocolate/Valitine Chocolate/1.png",

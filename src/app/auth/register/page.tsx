@@ -18,6 +18,12 @@ export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isLoading, setIsLoading] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  // ✅ Hydration Error ကာကွယ်ရန် useEffect ကိုသုံးပါသည်
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,25 +45,30 @@ export default function RegisterPage() {
   };
 
   // 💡 --- BLING BLING HEARTS BACKGROUND ---
-  const BlingHearts = () => (
-    <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-      {[...Array(15)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute"
-          style={{ left: `${Math.random() * 100}%`, top: `${Math.random() * 100}%` }}
-          animate={{ 
-            scale: [0.5, 1.2, 0.5], 
-            opacity: [0.2, 0.7, 0.2],
-            rotate: [0, 20, -20, 0]
-          }}
-          transition={{ duration: Math.random() * 3 + 3, repeat: Infinity }}
-        >
-          <Heart fill={i % 2 === 0 ? "#FFC0CB" : "#FFFFFF"} className="text-white/20" size={Math.random() * 15 + 10} />
-        </motion.div>
-      ))}
-    </div>
-  );
+  const BlingHearts = () => {
+    // Browser မရောက်မချင်း (Server-side မှာ) ဘာမှမပြစေရန်
+    if (!mounted) return null;
+
+    return (
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        {[...Array(15)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute"
+            style={{ left: `${Math.random() * 100}%`, top: `${Math.random() * 100}%` }}
+            animate={{ 
+              scale: [0.5, 1.2, 0.5], 
+              opacity: [0.2, 0.7, 0.2],
+              rotate: [0, 20, -20, 0]
+            }}
+            transition={{ duration: Math.random() * 3 + 3, repeat: Infinity }}
+          >
+            <Heart fill={i % 2 === 0 ? "#FFC0CB" : "#FFFFFF"} className="text-white/20" size={Math.random() * 15 + 10} />
+          </motion.div>
+        ))}
+      </div>
+    );
+  };
 
   return (
     <main className="relative min-h-screen w-full flex flex-col overflow-x-hidden">

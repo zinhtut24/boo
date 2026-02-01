@@ -17,6 +17,12 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [mounted, setMounted] = useState(false);
+
+  // ✅ Hydration Error ကာကွယ်ရန် useEffect ကိုသုံးပါသည်
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,26 +38,31 @@ export default function LoginPage() {
   };
 
   // 💡 --- BLING BLING HEARTS BACKGROUND ---
-  const BlingHearts = () => (
-    <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-      {[...Array(15)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute"
-          style={{ left: `${Math.random() * 100}%`, top: `${Math.random() * 100}%` }}
-          animate={{ 
-            scale: [0.5, 1.2, 0.5], 
-            opacity: [0.2, 0.8, 0.2],
-            rotate: [0, 20, -20, 0],
-            filter: ["blur(0px)", "blur(1px)", "blur(0px)"] 
-          }}
-          transition={{ duration: Math.random() * 10 + 10, repeat: Infinity }}
-        >
-          <Heart fill={i % 2 === 0 ? "#FFB6C1" : "#FFFFFF"} className="text-white/20" size={Math.random() * 15 + 10} />
-        </motion.div>
-      ))}
-    </div>
-  );
+  const BlingHearts = () => {
+    // Browser မရောက်မချင်း (Server-side မှာ) ဘာမှမပြစေရန်
+    if (!mounted) return null;
+
+    return (
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        {[...Array(15)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute"
+            style={{ left: `${Math.random() * 100}%`, top: `${Math.random() * 100}%` }}
+            animate={{ 
+              scale: [0.5, 1.2, 0.5], 
+              opacity: [0.2, 0.8, 0.2],
+              rotate: [0, 20, -20, 0],
+              filter: ["blur(0px)", "blur(1px)", "blur(0px)"] 
+            }}
+            transition={{ duration: Math.random() * 10 + 10, repeat: Infinity }}
+          >
+            <Heart fill={i % 2 === 0 ? "#FFB6C1" : "#FFFFFF"} className="text-white/20" size={Math.random() * 15 + 10} />
+          </motion.div>
+        ))}
+      </div>
+    );
+  };
 
   return (
     <main className="relative min-h-screen w-full flex flex-col overflow-x-hidden">
@@ -70,7 +81,7 @@ export default function LoginPage() {
           whileHover={{ scale: 1.1, rotate: -5 }}
         >
            <div className="bg-[#2C2926] text-white text-[9px] font-bold px-3 py-1.5 rounded-full mb-3 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity">
-              Tap to Register! 🎀
+             Tap to Register! 🎀
            </div>
           <img src="/images/bubu1.png" className="w-36 drop-shadow-2xl" alt="Bubu" />
         </motion.div>
