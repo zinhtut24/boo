@@ -41,9 +41,10 @@ const PRODUCTS = [
   { id: "bb-7", name: "Lapupu", price: 125000, category: "Blind Box", status: "Pre-order", img: "/images/Blindbox/lapupu1/lapupu1.png" },
 
   // --- Lipstick ---
-  { id: "ls-2", name: "Judydool_Lipgloss", price: 31000, category: "Lipstick", status: "New Arrivals", img: "/images/lipstick/judydoll_lipgloss/02/02.png" },
+  
   { id: "ls-1", name: "Romand Juicy", price: 24000, category: "Lipstick", status: "New Arrivals", img: "/images/lipstick/romandjuicyseries/lip1/gold.png" },
   { id: "ls-3", name: "Timephoria", price: 45000, category: "Lipstick", status: "New Arrivals", img: "/images/lipstick/timephoria/01/01.png" },
+  { id: "ls-2", name: "Judydool_Lipgloss", price: 31000, category: "Lipstick", status: "New Arrivals", img: "/images/lipstick/judydoll_lipgloss/02/02.png" },
   { id: "ls-4", name: "Bbia Glow Tint", price: 29000, category: "Lipstick", status: "New Arrivals", img: "/images/lipstick/bbia_glow_tint/1/1.png" },
   { id: "ls-5", name: "MAC", price: 75000, category: "Lipstick", status: "New Arrivals", img: "/images/lipstick/mac_lipmatte/1/1.png" },
 
@@ -145,14 +146,15 @@ export default function ShopPage() {
   if (!mounted) return null;
 
   return (
-    <main 
-      className="flex flex-col w-full min-h-screen relative" 
-      style={{
-        background: "linear-gradient(-45deg, #cb967d, #f5c9ea, #edf7c1, #e5c5b1)",
-        backgroundSize: "400% 400%",
-        animation: "bgFlow 10s ease infinite",
-      }}
-    >
+    <main className="flex flex-col w-full min-h-screen relative">
+      <div 
+        className="fixed inset-0 z-[-1] w-full h-full"
+        style={{
+          background: "linear-gradient(-45deg, #cb967d, #f8a2e3, #f8ffbd, #e5c5b1)",
+          backgroundSize: "400% 400%",
+          animation: "bgFlow 10s ease infinite",
+        }}
+      />
       <style dangerouslySetInnerHTML={{ __html: `
         @keyframes bgFlow {
           0% { background-position: 0% 50%; }

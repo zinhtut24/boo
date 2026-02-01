@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, ShoppingBag, CheckCircle2, RotateCcw } from "lucide-react";
+import { Sparkles, ShoppingBag, CheckCircle2, RotateCcw, Heart } from "lucide-react";
 import Link from "next/link";
 import Footer from "@/components/layout/footer";
 
@@ -103,17 +103,39 @@ export default function GiftFinderPage() {
     setIsFinished(false);
   };
 
+  // 💡 --- BLING BLING HEARTS BACKGROUND ---
+  const BlingHearts = () => (
+    <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+      {[...Array(15)].map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute"
+          style={{ left: `${Math.random() * 100}%`, top: `${Math.random() * 100}%` }}
+          animate={{ 
+            scale: [0.5, 1.2, 0.5], 
+            opacity: [0.2, 0.7, 0.2],
+            rotate: [0, 20, -20, 0]
+          }}
+          transition={{ duration: Math.random() * 3 + 3, repeat: Infinity }}
+        >
+          <Heart fill={i % 2 === 0 ? "#FFC0CB" : "#FFFFFF"} className="text-white/20" size={Math.random() * 15 + 10} />
+        </motion.div>
+      ))}
+    </div>
+  );
+
   if (!mounted) return null;
 
   return (
     <main 
       className="flex flex-col w-full min-h-screen relative overflow-x-hidden"
       style={{
-        background: "linear-gradient(-45deg, #cb967d, #f5c9ea, #edf7c1, #e5c5b1)",
-        backgroundSize: "400% 400%",
-        animation: "bgFlow 10s ease infinite",
+        background: "linear-gradient(-45deg, #cb967d, #f8a2e3, #f8ffbd, #e5c5b1)",
+          backgroundSize: "400% 400%",
+          animation: "bgFlow 10s ease infinite",
       }}
     >
+      
       <style dangerouslySetInnerHTML={{ __html: `
         @keyframes bgFlow {
           0% { background-position: 0% 50%; }
@@ -122,32 +144,7 @@ export default function GiftFinderPage() {
         }
       `}} />
 
-      {/* --- ✨ BLING LAYER --- */}
-      {/* <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-        {[...Array(60)].map((_, i) => {
-          const rand = Math.random();
-          let color = rand > 0.6 ? "#F5ABE4" : rand > 0.3 ? "#2C2926" : "#FFFFFF";
-          return (
-            <motion.div
-              key={`bling-${i}`}
-              className="absolute rounded-full"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                width: "2px",
-                height: "2px",
-                backgroundColor: color,
-                boxShadow: `0 0 8px ${color}`,
-              }}
-              animate={{
-                y: [0, Math.random() * -100, 0],
-                opacity: [0.1, 0.6, 0.1],
-              }}
-              transition={{ duration: Math.random() * 8 + 5, repeat: Infinity }}
-            />
-          );
-        })}
-      </div> */}
+      <BlingHearts />
 
       <div className="relative z-10 w-full text-[#2C2926]">
         <div className="container mx-auto px-6 pt-40 pb-32 max-w-5xl">

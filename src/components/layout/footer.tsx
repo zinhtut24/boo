@@ -27,9 +27,9 @@ export default function Footer() {
       { name: "Vision", href: "/vision" },
     ],
     support: [
-      { name: "Delivery Info", href: FB_MESSENGER_URL }, 
+      { name: "Delivery Info", href: "https://www.royalx.net/" }, 
       { name: "Track Order", href: "/track-order" },
-      { name: "Contact Us", href: FB_MESSENGER_URL },
+      { name: "Contact Us", href: "/contact" },
     ]
   };
 

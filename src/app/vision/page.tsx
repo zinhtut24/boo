@@ -9,18 +9,43 @@ import Footer from "@/components/layout/footer";
 export default function VisionPage() {
   const [mounted, setMounted] = useState(false);
   useEffect(() => { setMounted(true); }, []);
+
+  // 💡 --- BLING BLING HEARTS BACKGROUND ---
+  const BlingHearts = () => (
+    <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+      {[...Array(15)].map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute"
+          style={{ left: `${Math.random() * 100}%`, top: `${Math.random() * 100}%` }}
+          animate={{ 
+            scale: [0.5, 1.2, 0.5], 
+            opacity: [0.2, 0.7, 0.2],
+            rotate: [0, 20, -20, 0]
+          }}
+          transition={{ duration: Math.random() * 3 + 3, repeat: Infinity }}
+        >
+          <Heart fill={i % 2 === 0 ? "#FFC0CB" : "#FFFFFF"} className="text-white/20" size={Math.random() * 15 + 10} />
+        </motion.div>
+      ))}
+    </div>
+  );
+
   if (!mounted) return null;
 
   return (
-    <main 
-      className="flex flex-col w-full min-h-screen relative overflow-x-hidden selection:bg-[#D09478] selection:text-white"
-      style={{
-        background: "linear-gradient(-45deg, #cb967d, #f5c9ea, #edf7c1, #e5c5b1)",
-        backgroundSize: "400% 400%",
-        animation: "bgFlow 15s ease infinite",
-      }}
-    >
+    <main className="flex flex-col w-full min-h-screen relative overflow-x-hidden">
+      <div 
+        className="fixed inset-0 z-[-1] w-full h-full"
+        style={{
+          background: "linear-gradient(-45deg, #cb967d, #f8a2e3, #f8ffbd, #e5c5b1)",
+          backgroundSize: "400% 400%",
+          animation: "bgFlow 10s ease infinite",
+        }}
+      />
       <style dangerouslySetInnerHTML={{ __html: `@keyframes bgFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }` }} />
+
+      <BlingHearts />
 
       <div className="relative z-10 w-full text-[#2C2926] pt-32 pb-10">
         

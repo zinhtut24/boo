@@ -62,7 +62,10 @@ export default function RegisterPage() {
   return (
     <main className="relative min-h-screen w-full flex flex-col overflow-x-hidden">
       {/* Dynamic Background */}
-      <div className="fixed inset-0 z-[-1]" style={{ background: "linear-gradient(-45deg, #cb967d, #f8a2e3, #f1f7b8, #e5c5b1)", backgroundSize: "400% 400%", animation: "bgFlow 15s ease infinite" }} />
+      <div className="fixed inset-0 z-[-1]" style={{ 
+           background: "linear-gradient(-45deg, #cb967d, #f8a2e3, #f8ffbd, #e5c5b1)",
+          backgroundSize: "400% 400%",
+          animation: "bgFlow 10s ease infinite", }} />
       <style dangerouslySetInnerHTML={{ __html: `@keyframes bgFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }` }} />
       
       <div className="flex-1 flex items-center justify-center px-6 pt-32 pb-20 relative">

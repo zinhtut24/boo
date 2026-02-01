@@ -459,14 +459,15 @@ export default function StudioPage() {
   if (!mounted) return null;
 
   return (
-    <main 
-      className="flex flex-col w-full min-h-screen relative" // 💡 flex-col နှင့် min-h-screen သုံးထားသည်
-      style={{
-        background: "linear-gradient(-45deg, #cb967d, #f5c9ea, #edf7c1, #e5c5b1)",
-        backgroundSize: "400% 400%",
-        animation: "bgFlow 10s ease infinite",
-      }}
-    >
+    <main className="flex flex-col w-full min-h-screen relative overflow-x-hidden">
+      <div 
+        className="fixed inset-0 z-[-1] w-full h-full"
+        style={{
+          background: "linear-gradient(-45deg, #cb967d, #f8a2e3, #f8ffbd, #e5c5b1)",
+          backgroundSize: "400% 400%",
+          animation: "bgFlow 10s ease infinite",
+        }}
+      />
       <style dangerouslySetInnerHTML={{ __html: `@keyframes bgFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }`}} />
 
       {/* --- Main Content Wrap --- */}

@@ -1,7 +1,7 @@
 "use client";
 
 import { useCartStore } from "@/store/useCartStore";
-import { Minus, Plus, Trash2, ArrowLeft, CreditCard, Wallet, MapPin, Gift, CheckCircle2, Upload, Download, Calendar, Sparkles, X } from "lucide-react";
+import { Minus, Plus, Trash2, ArrowLeft, CreditCard, Wallet, MapPin, Gift, CheckCircle2, Upload, Download, Calendar, Sparkles, X, Heart } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
@@ -51,6 +51,27 @@ export default function CartPage() {
     else setDeliFee(0);
   }, [city]);
 
+  // 💡 --- BLING BLING HEARTS BACKGROUND LOGIC ---
+  const BlingHearts = () => (
+    <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+      {[...Array(15)].map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute"
+          style={{ left: `${Math.random() * 100}%`, top: `${Math.random() * 100}%` }}
+          animate={{ 
+            scale: [0.5, 1.2, 0.5], 
+            opacity: [0.2, 0.7, 0.2],
+            rotate: [0, 20, -20, 0]
+          }}
+          transition={{ duration: Math.random() * 3 + 3, repeat: Infinity }}
+        >
+          <Heart fill={i % 2 === 0 ? "#FFC0CB" : "#FFFFFF"} className="text-white/20" size={Math.random() * 15 + 10} />
+        </motion.div>
+      ))}
+    </div>
+  );
+
   if (!mounted) return null;
 
   const downloadVoucher = async () => {
@@ -91,9 +112,9 @@ export default function CartPage() {
     <main 
       className="flex flex-col w-full min-h-screen relative overflow-x-hidden selection:bg-[#D09478] selection:text-white"
       style={{
-        background: "linear-gradient(-45deg, #cb967d, #f5c9ea, #edf7c1, #e5c5b1)",
-        backgroundSize: "400% 400%",
-        animation: "bgFlow 15s ease infinite",
+        background: "linear-gradient(-45deg, #cb967d, #f8a2e3, #f8ffbd, #e5c5b1)",
+          backgroundSize: "400% 400%",
+          animation: "bgFlow 10s ease infinite",
       }}
     >
       <style dangerouslySetInnerHTML={{ __html: `@keyframes bgFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }` }} />
@@ -115,6 +136,8 @@ export default function CartPage() {
           />
         ))}
       </div>
+
+      <BlingHearts />
 
       <motion.img src="/images/bubu1.png" className="fixed top-24 left-[2%] w-24 md:w-32 opacity-20 pointer-events-none z-0 hidden lg:block" animate={{ y: [0, -15, 0], rotate: [0, 5, 0] }} transition={{ duration: 6, repeat: Infinity }} />
       <motion.img src="/images/bubududu1.png" className="fixed bottom-10 right-[2%] w-32 md:w-40 opacity-20 pointer-events-none z-0 hidden lg:block" animate={{ y: [0, 15, 0], rotate: [0, -5, 0] }} transition={{ duration: 7, repeat: Infinity }} />
@@ -147,12 +170,12 @@ export default function CartPage() {
                 
                 <div ref={voucherRef} className="bg-white/80 backdrop-blur-xl rounded-[2rem] shadow-2xl overflow-hidden border border-white relative mb-6 text-left p-0">
                   <div className="bg-[#2C2926] p-8 text-white relative text-center">
-                     <div className="absolute -left-4 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/20 rounded-full" />
-                     <div className="absolute -right-4 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/20 rounded-full" />
-                     <img src="/images/bubu1.png" className="absolute top-2 left-4 w-12 h-12 rotate-[-15deg] drop-shadow-lg" alt="" />
-                     <h3 className="text-xl font-serif italic">Boo Gift Voucher</h3>
-                     <img src="/images/bubududu1.png" className="absolute bottom-4 right-4 w-16 h-16 opacity-80" alt="" />
-                     <p className="text-[9px] text-gray-400 uppercase tracking-[0.3em] mt-2">ID: {orderId}</p>
+                      <div className="absolute -left-4 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/20 rounded-full" />
+                      <div className="absolute -right-4 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/20 rounded-full" />
+                      <img src="/images/bubu1.png" className="absolute top-2 left-4 w-12 h-12 rotate-[-15deg] drop-shadow-lg" alt="" />
+                      <h3 className="text-xl font-serif italic">Boo Gift Voucher</h3>
+                      <img src="/images/bubududu1.png" className="absolute bottom-4 right-4 w-16 h-16 opacity-80" alt="" />
+                      <p className="text-[9px] text-gray-400 uppercase tracking-[0.3em] mt-2">ID: {orderId}</p>
                   </div>
                   <div className="p-8 space-y-4 relative">
                     <div className="flex justify-between text-[10px] font-bold uppercase tracking-widest text-gray-400">
@@ -254,7 +277,6 @@ export default function CartPage() {
                       <div className="bg-white/40 backdrop-blur-xl p-8 rounded-[2.5rem] border border-white/60 shadow-sm space-y-6">
                         <h2 className="text-xl font-serif italic">Payment method</h2>
                         
-                        {/* 💡 အခုနေရာတွင် flex-nowrap ကိုသုံးပြီး Button များကို တစ်ကြောင်းတည်းရှိနေအောင် ညှိထားပါသည် */}
                         <div className="flex flex-nowrap bg-white/60 p-1.5 rounded-2xl border border-white/40 w-full overflow-x-hidden shadow-inner">
                           {["kpay", "wave", "card"].map((id) => (
                             <button 
@@ -262,7 +284,6 @@ export default function CartPage() {
                               onClick={() => setSelectedPayment(id)} 
                               className={cn(
                                 "flex-1 py-3 rounded-xl transition-all whitespace-nowrap px-1",
-                                // 💡 text size ကို screen သေးလျှင် ပိုသေးသွားအောင် ညှိထားပါသည်
                                 "text-[7.5px] min-[380px]:text-[9px] min-[450px]:text-[11px] font-bold uppercase tracking-tighter sm:tracking-widest",
                                 selectedPayment === id ? "bg-[#2C2926] text-white shadow-md scale-[1.02]" : "text-gray-400 hover:text-[#2C2926]"
                               )}

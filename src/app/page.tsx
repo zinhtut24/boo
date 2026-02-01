@@ -19,9 +19,9 @@ export default function Home() {
   const [clickHearts, setClickHearts] = useState<{ id: number; x: number; y: number }[]>([]);
 
   const bouquetImages = [
-    "/images/F/R/RR5/3.png",
-    "/images/F/L/LW5/5.png",            
-    "/images/F/Lo/lp/1.png"       
+    "/images/F/R/RR5/1.png",
+    "/images/F/L/LW5/1.png",            
+    "/images/F/Lo/lp5/1.png"       
   ];
 
   const nextBouquet = () => setActiveBouquet((prev) => (prev + 1) % bouquetImages.length);
@@ -82,11 +82,11 @@ export default function Home() {
   if (!mounted) return <div className="min-h-screen bg-[#FCFBFA]" />;
 
   const collections = [
-    { id: "fb-1", name: "Eternal Roses", price: "2000 MMK", img: "/images/Flowers/Rose/download (6).png", link: "/shop/product/fb-1" },
-    { id: "pt-4", name: "Hello Kitty", price: "35000 MMK", img: "/images/Plush/Hello Kitty/1.png", link: "/shop/product/pt-4" },
-    { id: "bb-5", name: "Skullpanda2 Blind Box", price: "125000 MMK", img: "/images/Blindbox/skullpanda2/skullpanda2.png", link: "/shop/product/bb-5" },
-    { id: "ls-1", name: "Romand Juicy", price: "25000 MMK", img: "/images/lipstick/romandjuicyseries/lip1/gold.png", link: "/shop/product/ls-1" },
-    { id: "bg-3", name: "Dior", price: "125000 MMK", img: "/images/Img/Bags/Dior 1.png", link: "/shop/product/bg-3" },
+    { id: "fb-1", name: "Eternal Roses", price: "32500 MMK", img: "/images/F/R/RR5/1.png", link: "/shop/product/fb-1" },
+    { id: "pt-4", name: "Kuromi", price: "12000 MMK", img: "/images/Plush/Hello Kitty/1.png", link: "/shop/product/pt-4" },
+    { id: "bb-5", name: "Skullpanda Blind Box", price: "85000 MMK", img: "/images/Blindbox/skullpanda2/skullpanda2.png", link: "/shop/product/bb-5" },
+    { id: "ls-1", name: "Romand Juicy", price: "24000 MMK", img: "/images/lipstick/romandjuicyseries/lip1/gold.png", link: "/shop/product/ls-1" },
+    { id: "bg-3", name: "Dior", price: "16,000,000 MMK", img: "/images/Img/Bags/Dior 1.png", link: "/shop/product/bg-3" },
   ];
 
   return (
