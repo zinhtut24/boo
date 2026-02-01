@@ -459,7 +459,7 @@ export default function StudioPage() {
   if (!mounted) return null;
 
   return (
-    <main className="flex flex-col w-full min-h-screen relative overflow-x-hidden">
+    <main className="flex flex-col w-full min-h-screen relative overflow-x-hidden antialiased">
       <div 
         className="fixed inset-0 z-[-1] w-full h-full"
         style={{
@@ -470,82 +470,109 @@ export default function StudioPage() {
       />
       <style dangerouslySetInnerHTML={{ __html: `@keyframes bgFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }`}} />
 
-      {/* --- Main Content Wrap --- */}
-      <div className="flex-1 flex flex-col pt-32 pb-20"> {/* 💡 flex-1 သည် Footer ကို အောက်ခြေသို့ တွန်းပို့ပေးပါသည် */}
+      <div className="flex-1 flex flex-col pt-32 pb-20">
         <AnimatePresence>
           {showToast && (
-            <motion.div initial={{ opacity: 0, y: -20, x: 20 }} animate={{ opacity: 1, y: 0, x: 0 }} exit={{ opacity: 0, y: -20, x: 20 }} className="fixed top-28 right-6 z-[100] bg-[#2C2926] text-white px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-3 border border-white/10">
-              <div className="w-8 h-8 rounded-full bg-[#A09080] flex items-center justify-center"><CheckCircle2 className="w-5 h-5 text-white" /></div>
-              <div><p className="text-[10px] font-bold uppercase tracking-widest text-[#A09080]">Success</p><p className="text-xs font-medium">Added to Shopping Bag!</p></div>
+            <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="fixed top-28 right-6 z-[100] bg-[#2C2926] text-white px-6 py-4 rounded-2xl shadow-xl flex items-center gap-3 border border-white/20">
+              <CheckCircle2 className="w-5 h-5 text-[#D09478]" />
+              <div>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-[#D09478]">Success</p>
+                <p className="text-xs font-semibold">Added to Shopping Bag!</p>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
 
         <div className="container mx-auto px-6 max-w-[1200px]">
           <header className="mb-12 flex flex-col items-center">
-            <div className="flex items-center gap-2 text-[#A09080] mb-3"><Sparkles className="w-4 h-4" /><span className="text-[10px] font-bold uppercase tracking-[0.4em]">Bespoke Studio</span></div>
-            <h1 className="text-4xl md:text-5xl font-serif italic tracking-tight text-center text-[#2C2926]">Customize Your Bouquet</h1>
+            <div className="flex items-center gap-2 text-[#2C2926]/60 mb-3">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span className="text-[10px] font-semibold uppercase tracking-[0.4em]">Bespoke Studio</span>
+            </div>
+            <h1 className="text-4xl md:text-5xl font-serif italic text-center text-[#2C2926] font-medium">Customize Your Bouquet</h1>
           </header>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             {/* PREVIEW */}
             <div className="space-y-6">
-              <div className="relative aspect-square w-full max-w-[480px] mx-auto rounded-[2.5rem] overflow-hidden bg-white/40 backdrop-blur-md shadow-xl border border-white/60">
-                <AnimatePresence mode="wait"><motion.img key={currentPreviewImage} src={currentPreviewImage} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="w-full h-full object-cover" alt="Preview" /></AnimatePresence>
+              <div className="relative aspect-square w-full max-w-[480px] mx-auto rounded-[2.5rem] overflow-hidden bg-white/30 backdrop-blur-xl shadow-2xl border border-white/40">
+                <AnimatePresence mode="wait">
+                  <motion.img key={currentPreviewImage} src={currentPreviewImage} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="w-full h-full object-cover" alt="Preview" />
+                </AnimatePresence>
                 <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 flex justify-between pointer-events-none">
-                  <button onClick={() => setStyleIndex(prev => (prev > 0 ? prev - 1 : availableStyles.length - 1))} className="w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm shadow-md flex items-center justify-center pointer-events-auto hover:bg-white active:scale-90"><ChevronLeft className="w-5 h-5 text-gray-400" /></button>
-                  <button onClick={() => setStyleIndex(prev => (prev < availableStyles.length - 1 ? prev + 1 : 0))} className="w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm shadow-md flex items-center justify-center pointer-events-auto hover:bg-white active:scale-90"><ChevronRight className="w-5 h-5 text-gray-400" /></button>
+                  <button onClick={() => setStyleIndex(prev => (prev > 0 ? prev - 1 : availableStyles.length - 1))} className="w-10 h-10 rounded-full bg-white/50 backdrop-blur-md shadow-lg flex items-center justify-center pointer-events-auto hover:bg-white active:scale-90 transition-all">
+                    <ChevronLeft className="w-5 h-5 text-[#2C2926]" />
+                  </button>
+                  <button onClick={() => setStyleIndex(prev => (prev < availableStyles.length - 1 ? prev + 1 : 0))} className="w-10 h-10 rounded-full bg-white/50 backdrop-blur-md shadow-lg flex items-center justify-center pointer-events-auto hover:bg-white active:scale-90 transition-all">
+                    <ChevronRight className="w-5 h-5 text-[#2C2926]" />
+                  </button>
                 </div>
               </div>
               <div className="flex gap-3 overflow-x-auto pb-4 custom-scrollbar max-w-[480px] mx-auto">
                 {availableStyles.map((img: string, idx: number) => (
-                  <button key={idx} onClick={() => setStyleIndex(idx)} className={cn("min-w-[80px] aspect-square rounded-xl overflow-hidden border-2 transition-all", styleIndex === idx ? "border-[#A09080] scale-105" : "border-white opacity-50")}><img src={img} className="w-full h-full object-cover" alt="thumb" /></button>
+                  <button key={idx} onClick={() => setStyleIndex(idx)} className={cn("min-w-[84px] aspect-square rounded-xl overflow-hidden border-2 transition-all shadow-sm", styleIndex === idx ? "border-[#2C2926] scale-105" : "border-white/40 opacity-50")}>
+                    <img src={img} className="w-full h-full object-cover" alt="thumbnail" />
+                  </button>
                 ))}
               </div>
             </div>
 
             {/* PANEL */}
-            <div className="bg-white/40 backdrop-blur-md p-8 rounded-[3rem] border border-white/60 shadow-sm space-y-8 max-w-[500px] mx-auto lg:mx-0 text-[#2C2926]">
-              <section className="space-y-3">
-                <h3 className="text-[10px] font-bold uppercase tracking-widest text-[#A09080]">1. Flower Species</h3>
-                <div className="grid grid-cols-3 gap-2">
+            <div className="bg-white/40 backdrop-blur-xl p-8 rounded-[3rem] border border-white/60 shadow-inner space-y-8 max-w-[500px] mx-auto lg:mx-0">
+              <section className="space-y-4">
+                <h3 className="text-[10px] font-bold uppercase tracking-widest text-[#2C2926]/40">1. Flower Species</h3>
+                <div className="grid grid-cols-3 gap-2.5">
                   {Object.keys(STUDIO_DATA).map((type) => (
-                    <button key={type} onClick={() => { setFlowerType(type); setColorId(STUDIO_DATA[type].colors[0].id); setStyleIndex(0); }} className={cn("py-3 rounded-xl border text-[10px] font-bold uppercase", flowerType === type ? "bg-[#2C2926] text-white" : "bg-white/30 text-gray-500")}>{type}</button>
+                    <button key={type} onClick={() => { setFlowerType(type); setColorId(STUDIO_DATA[type].colors[0].id); setStyleIndex(0); }} className={cn("py-3.5 rounded-xl border text-[11px] font-semibold uppercase tracking-wider transition-all", flowerType === type ? "bg-[#2C2926] text-white shadow-lg" : "bg-white/40 text-[#2C2926]/60 border-white/40 hover:bg-white/60")}>{type}</button>
                   ))}
                 </div>
               </section>
 
-              <section className="space-y-3">
-                <h3 className="text-[10px] font-bold uppercase tracking-widest text-[#A09080]">2. Bloom Count</h3>
-                <div className="flex items-center justify-between bg-white/30 p-4 rounded-2xl border border-white/60">
-                  <button disabled={count <= 5} onClick={() => { setCount(count - 1); setStyleIndex(0); }} className="w-8 h-8 rounded-full bg-white/60 flex items-center justify-center disabled:opacity-30"><Minus className="w-4 h-4" /></button>
-                  <div className="text-center"><span className="text-3xl font-serif">{count}</span><span className="text-[8px] uppercase font-bold text-gray-400 ml-2">Blooms</span></div>
-                  <button disabled={count >= 10} onClick={() => { setCount(count + 1); setStyleIndex(0); }} className="w-8 h-8 rounded-full bg-white/60 flex items-center justify-center disabled:opacity-30"><Plus className="w-4 h-4" /></button>
+              <section className="space-y-4">
+                <h3 className="text-[10px] font-bold uppercase tracking-widest text-[#2C2926]/40">2. Bloom Count</h3>
+                <div className="flex items-center justify-between bg-white/30 p-5 rounded-2xl border border-white/60 shadow-sm">
+                  <button disabled={count <= 5} onClick={() => { setCount(count - 1); setStyleIndex(0); }} className="w-9 h-9 rounded-full bg-white/60 flex items-center justify-center disabled:opacity-30 hover:bg-white transition-colors shadow-sm"><Minus className="w-4 h-4 text-[#2C2926]" /></button>
+                  <div className="text-center">
+                    <span className="text-3xl font-serif text-[#2C2926] font-medium">{count}</span>
+                    <span className="text-[9px] uppercase font-bold text-[#2C2926]/40 ml-2">Blooms</span>
+                  </div>
+                  <button disabled={count >= 10} onClick={() => { setCount(count + 1); setStyleIndex(0); }} className="w-9 h-9 rounded-full bg-white/60 flex items-center justify-center disabled:opacity-30 hover:bg-white transition-colors shadow-sm"><Plus className="w-4 h-4 text-[#2C2926]" /></button>
                 </div>
               </section>
 
-              <section className="space-y-3">
-                <div className="flex justify-between items-center"><h3 className="text-[10px] font-bold uppercase tracking-widest text-[#A09080]">3. Select Shade</h3><span className="text-[9px] font-bold text-gray-400 uppercase italic">{currentColor.name}</span></div>
-                <div className="flex gap-3">
+              <section className="space-y-4">
+                <div className="flex justify-between items-center px-1">
+                  <h3 className="text-[10px] font-bold uppercase tracking-widest text-[#2C2926]/40">3. Select Shade</h3>
+                  <span className="text-[10px] font-semibold text-[#D09478] uppercase italic tracking-wide">{currentColor.name}</span>
+                </div>
+                <div className="flex gap-4">
                   {currentFlowerData.colors.map((c: any) => (
-                    <button key={c.id} onClick={() => { setColorId(c.id); setStyleIndex(0); }} className={cn("w-10 h-10 rounded-full border-2 transition-all flex items-center justify-center", currentColor.id === c.id ? "border-[#A09080] scale-110 ring-2 ring-white" : "border-white/60")} style={{ backgroundColor: c.hex }}>{currentColor.id === c.id && <Check className="w-4 h-4 text-white" />}</button>
+                    <button key={c.id} onClick={() => { setColorId(c.id); setStyleIndex(0); }} className={cn("w-11 h-11 rounded-full border-2 transition-all flex items-center justify-center shadow-md", currentColor.id === c.id ? "border-[#2C2926] scale-110 ring-2 ring-white" : "border-white/60")} style={{ backgroundColor: c.hex }}>
+                      {currentColor.id === c.id && <Check className="w-4 h-4 text-white" />}
+                    </button>
                   ))}
                 </div>
               </section>
 
-              <div className="pt-6 border-t border-white/20">
-                <div className="flex justify-between items-center mb-6">
-                  <div><p className="text-[9px] font-bold uppercase text-gray-400 mb-1">Estimated Price</p><p className="text-3xl font-serif">{(count * 4500 + 10000).toLocaleString()} MMK</p></div>
-                  <button onClick={handleReset} className="text-[9px] font-bold uppercase text-gray-300 hover:text-red-400 flex items-center gap-1"><RotateCcw className="w-3 h-3" /> Reset</button>
+              <div className="pt-8 border-t border-white/20">
+                <div className="flex justify-between items-center mb-8">
+                  <div>
+                    <p className="text-[10px] font-bold uppercase text-[#2C2926]/40 mb-1">Estimated Price</p>
+                    <p className="text-3xl font-serif text-[#2C2926] font-medium">{(count * 4500 + 10000).toLocaleString()} <span className="text-sm font-sans opacity-40">MMK</span></p>
+                  </div>
+                  <button onClick={handleReset} className="text-[10px] font-bold uppercase text-[#2C2926]/30 hover:text-red-400 transition-colors flex items-center gap-1.5"><RotateCcw className="w-3.5 h-3.5" /> Reset</button>
                 </div>
-                <button onClick={handleAddToCart} className="w-full bg-[#2C2926] text-white py-5 rounded-2xl font-bold uppercase tracking-[0.2em] text-[10px] hover:bg-[#A09080] transition-all flex items-center justify-center gap-3"><ShoppingBag className="w-4 h-4" /> Add to Shopping bag <ChevronRight className="w-4 h-4" /></button>
+                <button onClick={handleAddToCart} className="w-full bg-[#2C2926] text-white py-5 rounded-2xl font-bold uppercase tracking-[0.2em] text-[11px] hover:bg-[#D09478] transition-all shadow-2xl flex items-center justify-center gap-3 active:scale-[0.98]">
+                  <ShoppingBag className="w-4 h-4" /> 
+                  Add to Shopping bag 
+                  <ChevronRight className="w-4 h-4" />
+                </button>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* --- Footer --- */}
       <Footer />
     </main>
   );

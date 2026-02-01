@@ -22,8 +22,8 @@ const ALL_PRODUCTS = [
     // 💡 Flower အတွက် Color Shades များကို ဒီမှာ သတ်မှတ်ထားသည်
     flowerColors: [
       { name: "Ruby Red", hex: "#B91C1C" },
-      { name: "Soft Pink", hex: "#FACC15" },
-      { name: "Bright Yellow", hex: "#F472B6" }
+      { name: "Soft Pink", hex: "#F472B6" },
+      { name: "Bright Yellow", hex: "#FACC15" }
     ],
     gallery: [
       "/images/F/R/RR5/1.png",
@@ -591,10 +591,8 @@ export default function ProductDetail({ params }: { params: Promise<{ id: string
   const [activeIndex, setActiveIndex] = useState(0); 
   const [isSwapped, setIsSwapped] = useState(false); 
   const [isWriting, setIsWriting] = useState(false);
-  const [newComment, setNewComment] = useState("");
-  const [newRating, setNewRating] = useState(5);
   const [showToast, setShowToast] = useState(false); 
-  const [reviews, setReviews] = useState([
+  const [reviews] = useState([
     { id: 1, user: "Zin Htut", date: "28 Jan 2026", rating: 5, comment: "Exceptional quality. The visual swap is very helpful!" },
   ]);
 
@@ -641,69 +639,63 @@ export default function ProductDetail({ params }: { params: Promise<{ id: string
     }
   };
 
-  const handleNext = () => {
-    setActiveIndex((prev) => (prev + 1) % totalGalleryItems);
-    setIsSwapped(false);
-  };
-
-  const handlePrev = () => {
-    setActiveIndex((prev) => (prev - 1 + totalGalleryItems) % totalGalleryItems);
-    setIsSwapped(false);
-  };
+  const handleNext = () => { setActiveIndex((prev) => (prev + 1) % totalGalleryItems); setIsSwapped(false); };
+  const handlePrev = () => { setActiveIndex((prev) => (prev - 1 + totalGalleryItems) % totalGalleryItems); setIsSwapped(false); };
 
   return (
     <main className="flex flex-col w-full min-h-screen relative overflow-x-hidden">
       <div className="fixed inset-0 z-[-1] w-full h-full" style={{ background: "linear-gradient(-45deg, #cb967d, #f8a2e3, #f8ffbd, #e5c5b1)", backgroundSize: "400% 400%", animation: "bgFlow 10s ease infinite" }} />
 
-      <div className="relative z-10 w-full text-[#2C2926] antialiased font-sans">
-        <AnimatePresence>{showToast && (<motion.div initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 50 }} className="fixed top-24 right-6 z-[100] bg-[#2C2926] text-white px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-4 border border-white/10"><div className="w-10 h-10 rounded-full bg-[#A09080] flex items-center justify-center"><CheckCircle2 className="w-6 h-6 text-white" /></div><div><p className="text-[10px] font-bold uppercase tracking-widest text-[#A09080]">Magic Bag</p><p className="text-xs font-medium">Added Successfully!</p></div></motion.div>)}</AnimatePresence>
+      <div className="relative z-10 w-full text-[#2C2926] antialiased">
+        <AnimatePresence>{showToast && (<motion.div initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 50 }} className="fixed top-24 right-6 z-[100] bg-[#2C2926] text-white px-6 py-4 rounded-2xl shadow-xl flex items-center gap-4 border border-white/20"><CheckCircle2 className="w-5 h-5 text-[#D09478]" /><div><p className="text-[10px] font-bold uppercase tracking-widest text-[#D09478]">Success</p><p className="text-xs font-semibold">Added to Bag</p></div></motion.div>)}</AnimatePresence>
 
         <div className="container mx-auto px-6 pt-24 pb-12 max-w-[1100px]">
-          <nav className="flex items-center gap-2 text-[9px] font-bold uppercase tracking-[0.2em] text-gray-400 mb-8"><Link href="/" className="hover:text-[#A09080]">Home</Link><ChevronRightSquare className="w-3 h-3 opacity-30" /><Link href="/shop/collection" className="hover:text-[#A09080]">Collection</Link><ChevronRightSquare className="w-3 h-3 opacity-30" /><span className="text-[#2C2926]">{product.name}</span></nav>
+          {/* 💡 Breadcrumb - SEMIBOLD & VISIBLE COLOR */}
+          <nav className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.2em] mb-8">
+            <Link href="/" className="text-[#2C2926]/60 hover:text-[#2C2926] transition-colors">Home</Link>
+            <ChevronRightSquare className="w-3.5 h-3.5 text-[#2C2926]/20" />
+            <Link href="/shop/collection" className="text-[#2C2926]/60 hover:text-[#2C2926] transition-colors">Collection</Link>
+            <ChevronRightSquare className="w-3.5 h-3.5 text-[#2C2926]/20" />
+            <span className="text-[#2C2926] underline underline-offset-4 decoration-[#D09478]/30">{product.name}</span>
+          </nav>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
             <div className="lg:col-span-7 space-y-5 lg:sticky lg:top-24">
-              <div className="relative aspect-square rounded-[2.5rem] overflow-hidden bg-white/40 backdrop-blur-md border border-white/60 shadow-xl group">
+              <div className="relative aspect-square rounded-[2.5rem] overflow-hidden bg-white/40 backdrop-blur-md border border-white/60 shadow-xl">
                 <Product3D imageUrl={currentMainImage} />
-                
-                {/* 💡 ARROW NAVIGATION BUTTONS */}
                 {totalGalleryItems > 1 && (
                   <>
-                    <button onClick={handlePrev} className="absolute left-4 top-1/2 -translate-y-1/2 z-40 p-3 rounded-full bg-white/20 backdrop-blur-md border border-white/40 text-[#2C2926] hover:bg-white hover:shadow-lg transition-all active:scale-90">
-                      <ChevronLeft className="w-6 h-6" />
-                    </button>
-                    <button onClick={handleNext} className="absolute right-4 top-1/2 -translate-y-1/2 z-40 p-3 rounded-full bg-white/20 backdrop-blur-md border border-white/40 text-[#2C2926] hover:bg-white hover:shadow-lg transition-all active:scale-90">
-                      <ChevronRight className="w-6 h-6" />
-                    </button>
+                    <button onClick={handlePrev} className="absolute left-4 top-1/2 -translate-y-1/2 z-40 p-3 rounded-full bg-white/40 backdrop-blur-md border border-white/40 text-[#2C2926] hover:bg-white shadow-lg active:scale-90"><ChevronLeft className="w-6 h-6" /></button>
+                    <button onClick={handleNext} className="absolute right-4 top-1/2 -translate-y-1/2 z-40 p-3 rounded-full bg-white/40 backdrop-blur-md border border-white/40 text-[#2C2926] hover:bg-white shadow-lg active:scale-90"><ChevronRight className="w-6 h-6" /></button>
                   </>
                 )}
-
                 {(isLipstick || isBag) && currentSideImage && (
-                  <div className="absolute bottom-6 left-6 z-30 flex flex-col items-center gap-2">
-                    <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => setIsSwapped(!isSwapped)} className="relative w-20 h-20 rounded-full border-4 border-white/90 shadow-2xl overflow-hidden backdrop-blur-md group/side bg-white/20">
+                  <div className="absolute bottom-6 left-6 z-30">
+                    <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => setIsSwapped(!isSwapped)} className="relative w-20 h-20 rounded-full border-4 border-white shadow-2xl overflow-hidden bg-white/20 backdrop-blur-md group/side">
                       <img src={currentSideImage} className="w-full h-full object-cover" alt="Toggle" />
                       <div className="absolute inset-0 bg-black/20 opacity-0 group-hover/side:opacity-100 transition-opacity flex items-center justify-center"><RefreshCw className="text-white w-5 h-5" /></div>
                     </motion.button>
                   </div>
                 )}
-                <div className="absolute top-6 left-6 flex flex-col gap-2"><span className="w-fit bg-[#2C2926] text-white px-4 py-1.5 rounded-full text-[8px] font-bold uppercase tracking-[0.2em] shadow-md">{product.status}</span></div>
+                <div className="absolute top-6 left-6"><span className="bg-[#2C2926] text-white px-4 py-1.5 rounded-full text-[9px] font-bold uppercase tracking-widest shadow-md">{product.status}</span></div>
               </div>
 
+              {/* Variant Selections */}
               <div className="px-1">
                 {isFlower ? (
                    <div className="bg-white/40 backdrop-blur-md p-6 rounded-[2rem] border border-white/60 shadow-sm space-y-4">
-                     <div className="flex justify-between items-center px-1"><span style={{ fontSize: '10px' }} className="font-bold uppercase tracking-[0.3em] text-[#A09080]">Available Shades</span><span className="text-[10px] font-medium text-gray-400 italic">{product.flowerColors?.[activeIndex]?.name}</span></div>
-                     <div className="flex gap-4">{product.flowerColors?.map((color: any, index: number) => (<button key={index} onClick={() => setActiveIndex(index)} className={cn("w-12 h-12 rounded-full border-4 transition-all shrink-0", activeIndex === index ? "border-white ring-2 ring-[#A09080] scale-110 shadow-lg" : "border-transparent opacity-70")} style={{ backgroundColor: color.hex }} />))}</div>
+                     <div className="flex justify-between items-center px-1"><span className="text-[10px] font-bold uppercase tracking-widest text-[#2C2926]/40">Available Shades</span><span className="text-[11px] font-semibold text-[#D09478] italic">{product.flowerColors?.[activeIndex]?.name}</span></div>
+                     <div className="flex gap-4">{product.flowerColors?.map((color: any, index: number) => (<button key={index} onClick={() => setActiveIndex(index)} className={cn("w-12 h-12 rounded-full border-4 transition-all shrink-0", activeIndex === index ? "border-white ring-2 ring-[#2C2926]/20 scale-110 shadow-lg" : "border-transparent opacity-70")} style={{ backgroundColor: color.hex }} />))}</div>
                    </div>
                 ) : isLipstick ? (
                   <div className="bg-white/40 backdrop-blur-md p-6 rounded-[2rem] border border-white/60 shadow-sm space-y-4">
-                    <div className="flex justify-between items-center px-1"><span style={{ fontSize: '10px' }} className="font-bold uppercase tracking-[0.3em] text-[#A09080]">Choose Shade</span><span className="text-[10px] font-medium text-gray-400 italic">{product.colors[activeIndex].name}</span></div>
-                    <div className="flex gap-4 overflow-x-auto pb-2">{product.colors.map((color: any, index: number) => (<button key={index} onClick={() => { setActiveIndex(index); setIsSwapped(false); }} className={cn("w-12 h-12 rounded-full border-4 transition-all shrink-0", activeIndex === index ? "border-white ring-2 ring-[#A09080] scale-110 shadow-lg" : "border-transparent opacity-70")} style={{ backgroundColor: color.hex }} />))}</div>
+                    <div className="flex justify-between items-center px-1"><span className="text-[10px] font-bold uppercase tracking-widest text-[#2C2926]/40">Choose Shade</span><span className="text-[11px] font-semibold text-[#D09478] italic">{product.colors[activeIndex].name}</span></div>
+                    <div className="flex gap-4 overflow-x-auto pb-2">{product.colors.map((color: any, index: number) => (<button key={index} onClick={() => { setActiveIndex(index); setIsSwapped(false); }} className={cn("w-12 h-12 rounded-full border-4 transition-all shrink-0", activeIndex === index ? "border-white ring-2 ring-[#2C2926]/20 scale-110 shadow-lg" : "border-transparent opacity-70")} style={{ backgroundColor: color.hex }} />))}</div>
                   </div>
                 ) : (
                   <div className="grid grid-cols-5 gap-3">
                     {(isBag ? product.galleryPairs : (product.gallery || [product.img])).map((item: any, index: number) => (
-                      <button key={index} onClick={() => { setActiveIndex(index); setIsSwapped(false); }} className={cn("aspect-square rounded-2xl overflow-hidden border-2 transition-all p-0.5 bg-white/40 shadow-sm", activeIndex === index ? "border-[#A09080] scale-105" : "border-transparent opacity-60")}><img src={isBag ? item.original : item} className="w-full h-full object-cover rounded-xl" alt="Variant" /></button>
+                      <button key={index} onClick={() => { setActiveIndex(index); setIsSwapped(false); }} className={cn("aspect-square rounded-2xl overflow-hidden border-2 transition-all p-0.5 bg-white/40 shadow-sm", activeIndex === index ? "border-[#2C2926]/40 scale-105" : "border-transparent opacity-60")}><img src={isBag ? item.original : item} className="w-full h-full object-cover rounded-xl" alt="Variant" /></button>
                     ))}
                   </div>
                 )}
@@ -711,26 +703,38 @@ export default function ProductDetail({ params }: { params: Promise<{ id: string
             </div>
 
             <div className="lg:col-span-5 space-y-6 py-2">
-              <div className="space-y-4"><h1 className="text-4xl md:text-5xl font-serif text-[#2C2926] italic">Premium <br /> {product.name}</h1><p className="text-2xl font-light text-[#A09080]">{(product.price * quantity).toLocaleString()} MMK</p></div>
+              <div className="space-y-4">
+                <h1 className="text-4xl md:text-5xl font-serif text-[#2C2926] italic">Premium <br /> {product.name}</h1>
+                <p className="text-2xl font-semibold text-[#2C2926]/90">{(product.price * quantity).toLocaleString()} MMK</p>
+              </div>
               <div className="space-y-5 pt-2">
                 {!isFlower && (
-                  <div className="flex items-center justify-between bg-white/40 backdrop-blur-md px-3 py-2 rounded-full border border-white/60"><span className="text-[8px] font-bold uppercase tracking-widest text-gray-500 ml-6">Quantity</span><div className="flex items-center gap-6 mr-1 bg-white/60 rounded-full px-6 py-2.5 shadow-inner"><button onClick={() => quantity > 1 && setQuantity(quantity - 1)} className="hover:text-[#A09080]"><Minus className="w-4 h-4" /></button><span className="font-serif text-lg w-4 text-center">{quantity}</span><button onClick={() => setQuantity(quantity + 1)} className="hover:text-[#A09080]"><Plus className="w-4 h-4" /></button></div></div>
+                  <div className="flex items-center justify-between bg-white/50 backdrop-blur-md px-3 py-2 rounded-full border border-white/60"><span className="text-[10px] font-bold uppercase tracking-widest text-[#2C2926]/30 ml-6">Quantity</span><div className="flex items-center gap-6 mr-1 bg-white rounded-full px-6 py-2.5 shadow-sm"><button onClick={() => quantity > 1 && setQuantity(quantity - 1)} className="hover:text-[#D09478]"><Minus className="w-4 h-4" /></button><span className="text-lg font-serif w-4 text-center">{quantity}</span><button onClick={() => setQuantity(quantity + 1)} className="hover:text-[#D09478]"><Plus className="w-4 h-4" /></button></div></div>
                 )}
                 <div className="flex gap-3">
                   {isFlower ? (
-                    <Link href="/studio" className="flex-1 bg-[#2C2926] text-white py-4 rounded-full font-bold uppercase tracking-[0.2em] text-[10px] hover:bg-[#D09478] transition-all shadow-xl active:scale-95 flex items-center justify-center gap-3"><Sparkles className="w-4 h-4" /> Customize in Studio</Link>
+                    <Link href="/studio" className="flex-1 bg-[#2C2926] text-white py-4 rounded-full font-bold uppercase tracking-widest text-[11px] hover:bg-[#D09478] transition-all shadow-xl active:scale-95 flex items-center justify-center gap-3"><Sparkles className="w-4 h-4" /> Customize in Studio</Link>
                   ) : (
-                    <button onClick={handleAddToCartWithToast} className="flex-1 bg-[#2C2926] text-white py-4 rounded-full font-bold uppercase tracking-[0.2em] text-[10px] hover:bg-[#A09080] transition-all shadow-xl active:scale-95 flex items-center justify-center gap-3"><ShoppingBag className="w-4 h-4" /> Add to Shopping Bag</button>
+                    <button onClick={handleAddToCartWithToast} className="flex-1 bg-[#2C2926] text-white py-4 rounded-full font-bold uppercase tracking-widest text-[11px] hover:bg-[#D09478] transition-all shadow-xl active:scale-95 flex items-center justify-center gap-3"><ShoppingBag className="w-4 h-4" /> Add to Shopping Bag</button>
                   )}
-                  <button onClick={() => toggleWishlist({ id: product.id, name: product.name, price: `${product.price.toLocaleString()} MMK`, img: product.img })} className={cn("p-4 border border-white/60 rounded-full transition-all bg-white/40 shadow-sm", isSaved ? "text-rose-500 border-rose-100" : "hover:text-rose-400")}><Heart className={cn("w-5 h-5", isSaved && "fill-current")} /></button>
+                  <button onClick={() => toggleWishlist({ id: product.id, name: product.name, price: `${product.price.toLocaleString()} MMK`, img: product.img })} className={cn("p-4.5 border border-white/60 rounded-full bg-white/40 transition-all", isSaved ? "text-rose-500 border-rose-100" : "hover:text-rose-400")}><Heart className={cn("w-5 h-5", isSaved && "fill-current")} /></button>
                 </div>
-                <div className="flex items-center gap-4 p-5 bg-white/30 backdrop-blur-md rounded-[1.5rem] border border-white/40 shadow-sm"><div className="p-2.5 bg-white/60 text-[#A09080] rounded-full"><Truck className="w-5 h-5" /></div><div><h4 className="text-[9px] font-bold uppercase tracking-widest text-[#2C2926]">Bespoke Delivery</h4><p className="text-[10px] text-gray-500 mt-1 font-light italic">Carefully delivered across Yangon.</p></div></div>
+                <div className="flex items-center gap-4 p-5 bg-white/40 backdrop-blur-md rounded-[1.5rem] border border-white/60 shadow-sm"><div className="p-3 bg-white text-[#2C2926] rounded-full shadow-md"><Truck className="w-5 h-5" /></div><div><h4 className="text-[10px] font-bold uppercase tracking-widest text-[#2C2926]">Bespoke Delivery</h4><p className="text-[11px] text-[#2C2926]/50 mt-1 font-medium italic">Carefully delivered across Yangon.</p></div></div>
               </div>
             </div>
           </div>
+
           <section className="mt-24 pt-16 border-t border-white/20">
-             <div className="flex items-center justify-between mb-12"><h2 className="text-2xl font-serif italic text-[#2C2926]">Bespoke Reviews</h2><button onClick={() => setIsWriting(!isWriting)} className="text-[10px] font-bold uppercase border-b border-[#2C2926] pb-1">Share Experience</button></div>
-             <div className="grid md:grid-cols-2 gap-8">{reviews.map((rev) => (<div key={rev.id} className="bg-white/30 backdrop-blur-md p-8 rounded-[2.5rem] border border-white/40 shadow-sm space-y-4"><div className="flex gap-1 text-amber-400">{[...Array(5)].map((_, i) => <Star key={i} className={cn("w-3 h-3", i < rev.rating ? "fill-current" : "text-gray-200")} />)}</div><p className="text-sm text-gray-600 font-light italic">"{rev.comment}"</p><div className="flex items-center gap-3 pt-4 border-t border-white/10"><span className="text-[9px] font-bold uppercase tracking-widest text-gray-400">{rev.user} — {rev.date}</span></div></div>))}</div>
+             <div className="flex items-center justify-between mb-12"><h2 className="text-3xl font-serif italic text-[#2C2926]">Bespoke Reviews</h2><button className="text-[11px] font-bold uppercase border-b border-[#2C2926] pb-1 hover:text-[#D09478]">Share Experience</button></div>
+             <div className="grid md:grid-cols-2 gap-8">
+               {reviews.map((rev) => (
+                 <div key={rev.id} className="bg-white/40 backdrop-blur-md p-8 rounded-[2.5rem] border border-white/60 shadow-sm space-y-4">
+                   <div className="flex gap-1 text-amber-500">{[...Array(5)].map((_, i) => <Star key={i} className={cn("w-3.5 h-3.5", i < rev.rating ? "fill-current" : "text-gray-200")} />)}</div>
+                   <p className="text-sm text-[#2C2926]/70 font-medium italic leading-relaxed">"{rev.comment}"</p>
+                   <div className="flex items-center gap-3 pt-4 border-t border-white/10"><span className="text-[10px] font-bold uppercase tracking-widest text-[#2C2926]/30">{rev.user} — {rev.date}</span></div>
+                 </div>
+               ))}
+             </div>
           </section>
         </div>
         <Footer />
