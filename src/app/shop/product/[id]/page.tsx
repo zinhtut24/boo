@@ -2,6 +2,7 @@
 
 import React, { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation"; 
 import { 
   Heart, ShoppingBag, Truck, Star, Plus, Minus, 
   ChevronLeft, ChevronRight, ChevronRightSquare, RefreshCw,
@@ -12,6 +13,7 @@ import Product3D from "@/components/canvas/product3D";
 import Footer from "@/components/layout/footer";
 import { useCartStore } from "@/store/useCartStore";
 import { useWishlistStore } from "@/store/useWishlistStore"; 
+import { useAuthStore } from "@/store/useAuthStore"; 
 import { cn } from "@/lib/utils";
 
 // --- Products Data ---
@@ -586,6 +588,7 @@ const ALL_PRODUCTS = [
 ];
 
 export default function ProductDetail({ params }: { params: Promise<{ id: string }> }) {
+  const router = useRouter();
   const { id } = React.use(params);
   const [quantity, setQuantity] = useState(1);
   const [activeIndex, setActiveIndex] = useState(0); 
@@ -599,6 +602,7 @@ export default function ProductDetail({ params }: { params: Promise<{ id: string
   const addToCart = useCartStore((state) => state.addToCart);
   const toggleWishlist = useWishlistStore((state) => state.toggleWishlist);
   const wishlist = useWishlistStore((state) => state.wishlist);
+  const isLoggedIn = useAuthStore((state) => state.isLoggedIn); 
 
   const product = useMemo(() => ALL_PRODUCTS.find((p) => p.id === id), [id]);
   const isLipstick = product?.category === "Lipstick" && product.colors;
@@ -633,6 +637,12 @@ export default function ProductDetail({ params }: { params: Promise<{ id: string
   if (!product) return <div className="pt-20 text-center text-gray-400">Product not found</div>;
 
   const handleAddToCartWithToast = () => {
+    if (!isLoggedIn) {
+      alert("Join our community first! Please Register to continue. ✨");
+      router.push("/auth/register"); 
+      return;
+    }
+
     if (product) {
       addToCart({ id: product.id, name: product.name, price: product.price, img: currentMainImage || product.img, quantity: quantity });
       setShowToast(true); setTimeout(() => setShowToast(false), 3000);
@@ -650,13 +660,13 @@ export default function ProductDetail({ params }: { params: Promise<{ id: string
         <AnimatePresence>{showToast && (<motion.div initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 50 }} className="fixed top-24 right-6 z-[100] bg-[#2C2926] text-white px-6 py-4 rounded-2xl shadow-xl flex items-center gap-4 border border-white/20"><CheckCircle2 className="w-5 h-5 text-[#D09478]" /><div><p className="text-[10px] font-bold uppercase tracking-widest text-[#D09478]">Success</p><p className="text-xs font-semibold">Added to Bag</p></div></motion.div>)}</AnimatePresence>
 
         <div className="container mx-auto px-6 pt-24 pb-12 max-w-[1100px]">
-          {/* 💡 Breadcrumb - SEMIBOLD & VISIBLE COLOR */}
+          {/* 💡 Breadcrumb - SEMIBOLD & VISIBLE (Balanced) */}
           <nav className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.2em] mb-8">
-            <Link href="/" className="text-[#2C2926]/60 hover:text-[#2C2926] transition-colors">Home</Link>
+            <Link href="/" className="text-[#2C2926]/40 hover:text-[#2C2926] transition-colors">Home</Link>
             <ChevronRightSquare className="w-3.5 h-3.5 text-[#2C2926]/20" />
-            <Link href="/shop/collection" className="text-[#2C2926]/60 hover:text-[#2C2926] transition-colors">Collection</Link>
+            <Link href="/shop/collection" className="text-[#2C2926]/40 hover:text-[#2C2926] transition-colors">Collection</Link>
             <ChevronRightSquare className="w-3.5 h-3.5 text-[#2C2926]/20" />
-            <span className="text-[#2C2926] underline underline-offset-4 decoration-[#D09478]/30">{product.name}</span>
+            <span className="text-[#2C2926] opacity-70 underline underline-offset-4 decoration-[#D09478]/30">{product.name}</span>
           </nav>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
@@ -680,22 +690,21 @@ export default function ProductDetail({ params }: { params: Promise<{ id: string
                 <div className="absolute top-6 left-6"><span className="bg-[#2C2926] text-white px-4 py-1.5 rounded-full text-[9px] font-bold uppercase tracking-widest shadow-md">{product.status}</span></div>
               </div>
 
-              {/* Variant Selections */}
               <div className="px-1">
                 {isFlower ? (
                    <div className="bg-white/40 backdrop-blur-md p-6 rounded-[2rem] border border-white/60 shadow-sm space-y-4">
-                     <div className="flex justify-between items-center px-1"><span className="text-[10px] font-bold uppercase tracking-widest text-[#2C2926]/40">Available Shades</span><span className="text-[11px] font-semibold text-[#D09478] italic">{product.flowerColors?.[activeIndex]?.name}</span></div>
+                     <div className="flex justify-between items-center px-1"><span className="text-[10px] font-bold uppercase tracking-widest text-[#2C2926]/40">Available Shades</span><span className="text-[11px] font-semibold text-[#2C2926]/60 italic">{product.flowerColors?.[activeIndex]?.name}</span></div>
                      <div className="flex gap-4">{product.flowerColors?.map((color: any, index: number) => (<button key={index} onClick={() => setActiveIndex(index)} className={cn("w-12 h-12 rounded-full border-4 transition-all shrink-0", activeIndex === index ? "border-white ring-2 ring-[#2C2926]/20 scale-110 shadow-lg" : "border-transparent opacity-70")} style={{ backgroundColor: color.hex }} />))}</div>
                    </div>
                 ) : isLipstick ? (
                   <div className="bg-white/40 backdrop-blur-md p-6 rounded-[2rem] border border-white/60 shadow-sm space-y-4">
-                    <div className="flex justify-between items-center px-1"><span className="text-[10px] font-bold uppercase tracking-widest text-[#2C2926]/40">Choose Shade</span><span className="text-[11px] font-semibold text-[#D09478] italic">{product.colors[activeIndex].name}</span></div>
+                    <div className="flex justify-between items-center px-1"><span className="text-[10px] font-bold uppercase tracking-widest text-[#2C2926]/40">Choose Shade</span><span className="text-[11px] font-semibold text-[#2C2926]/60 italic">{product.colors[activeIndex].name}</span></div>
                     <div className="flex gap-4 overflow-x-auto pb-2">{product.colors.map((color: any, index: number) => (<button key={index} onClick={() => { setActiveIndex(index); setIsSwapped(false); }} className={cn("w-12 h-12 rounded-full border-4 transition-all shrink-0", activeIndex === index ? "border-white ring-2 ring-[#2C2926]/20 scale-110 shadow-lg" : "border-transparent opacity-70")} style={{ backgroundColor: color.hex }} />))}</div>
                   </div>
                 ) : (
                   <div className="grid grid-cols-5 gap-3">
                     {(isBag ? product.galleryPairs : (product.gallery || [product.img])).map((item: any, index: number) => (
-                      <button key={index} onClick={() => { setActiveIndex(index); setIsSwapped(false); }} className={cn("aspect-square rounded-2xl overflow-hidden border-2 transition-all p-0.5 bg-white/40 shadow-sm", activeIndex === index ? "border-[#2C2926]/40 scale-105" : "border-transparent opacity-60")}><img src={isBag ? item.original : item} className="w-full h-full object-cover rounded-xl" alt="Variant" /></button>
+                      <button key={index} onClick={() => { setActiveIndex(index); setIsSwapped(false); }} className={cn("aspect-square rounded-2xl overflow-hidden border-2 transition-all p-0.5 bg-white/40 shadow-sm", activeIndex === index ? "border-[#2C2926]/20 scale-105" : "border-transparent opacity-60")}><img src={isBag ? item.original : item} className="w-full h-full object-cover rounded-xl" alt="Variant" /></button>
                     ))}
                   </div>
                 )}
@@ -704,37 +713,28 @@ export default function ProductDetail({ params }: { params: Promise<{ id: string
 
             <div className="lg:col-span-5 space-y-6 py-2">
               <div className="space-y-4">
-                <h1 className="text-4xl md:text-5xl font-serif text-[#2C2926] italic">Premium <br /> {product.name}</h1>
-                <p className="text-2xl font-semibold text-[#2C2926]/90">{(product.price * quantity).toLocaleString()} MMK</p>
+                <h1 className="text-4xl md:text-5xl font-serif text-[#2C2926] italic font-medium">Premium <br /> {product.name}</h1>
+                <p className="text-2xl font-semibold text-[#2C2926]/80">{(product.price * quantity).toLocaleString()} MMK</p>
               </div>
               <div className="space-y-5 pt-2">
                 {!isFlower && (
-                  <div className="flex items-center justify-between bg-white/50 backdrop-blur-md px-3 py-2 rounded-full border border-white/60"><span className="text-[10px] font-bold uppercase tracking-widest text-[#2C2926]/30 ml-6">Quantity</span><div className="flex items-center gap-6 mr-1 bg-white rounded-full px-6 py-2.5 shadow-sm"><button onClick={() => quantity > 1 && setQuantity(quantity - 1)} className="hover:text-[#D09478]"><Minus className="w-4 h-4" /></button><span className="text-lg font-serif w-4 text-center">{quantity}</span><button onClick={() => setQuantity(quantity + 1)} className="hover:text-[#D09478]"><Plus className="w-4 h-4" /></button></div></div>
+                  <div className="flex items-center justify-between bg-white/50 backdrop-blur-md px-3 py-2 rounded-full border border-white/60 shadow-sm"><span className="text-[10px] font-bold uppercase tracking-widest text-[#2C2926]/30 ml-6">Quantity</span><div className="flex items-center gap-6 mr-1 bg-white rounded-full px-6 py-2.5 shadow-sm"><button onClick={() => quantity > 1 && setQuantity(quantity - 1)} className="hover:text-[#D09478] text-[#2C2926]/60"><Minus className="w-4 h-4" /></button><span className="text-lg font-medium w-4 text-center">{quantity}</span><button onClick={() => setQuantity(quantity + 1)} className="hover:text-[#D09478] text-[#2C2926]/60"><Plus className="w-4 h-4" /></button></div></div>
                 )}
                 <div className="flex gap-3">
-                  {isFlower ? (
-                    <Link href="/studio" className="flex-1 bg-[#2C2926] text-white py-4 rounded-full font-bold uppercase tracking-widest text-[11px] hover:bg-[#D09478] transition-all shadow-xl active:scale-95 flex items-center justify-center gap-3"><Sparkles className="w-4 h-4" /> Customize in Studio</Link>
-                  ) : (
-                    <button onClick={handleAddToCartWithToast} className="flex-1 bg-[#2C2926] text-white py-4 rounded-full font-bold uppercase tracking-widest text-[11px] hover:bg-[#D09478] transition-all shadow-xl active:scale-95 flex items-center justify-center gap-3"><ShoppingBag className="w-4 h-4" /> Add to Shopping Bag</button>
-                  )}
-                  <button onClick={() => toggleWishlist({ id: product.id, name: product.name, price: `${product.price.toLocaleString()} MMK`, img: product.img })} className={cn("p-4.5 border border-white/60 rounded-full bg-white/40 transition-all", isSaved ? "text-rose-500 border-rose-100" : "hover:text-rose-400")}><Heart className={cn("w-5 h-5", isSaved && "fill-current")} /></button>
+                  <button onClick={handleAddToCartWithToast} className="flex-1 bg-[#2C2926] text-white py-4.5 rounded-full font-bold uppercase tracking-widest text-[11px] hover:bg-[#D09478] transition-all shadow-xl active:scale-95 flex items-center justify-center gap-3">
+                    {isFlower ? <Sparkles className="w-4 h-4" /> : <ShoppingBag className="w-4 h-4" />}
+                    {isFlower ? "Customize in Studio" : "Add to Shopping Bag"}
+                  </button>
+                  <button onClick={() => toggleWishlist({ id: product.id, name: product.name, price: `${product.price.toLocaleString()} MMK`, img: product.img })} className={cn("p-4.5 border border-white/60 rounded-full transition-all bg-white/40 shadow-sm", isSaved ? "text-rose-500 border-rose-100" : "text-[#2C2926]/60 hover:text-rose-400")}><Heart className={cn("w-6 h-6", isSaved && "fill-current")} /></button>
                 </div>
-                <div className="flex items-center gap-4 p-5 bg-white/40 backdrop-blur-md rounded-[1.5rem] border border-white/60 shadow-sm"><div className="p-3 bg-white text-[#2C2926] rounded-full shadow-md"><Truck className="w-5 h-5" /></div><div><h4 className="text-[10px] font-bold uppercase tracking-widest text-[#2C2926]">Bespoke Delivery</h4><p className="text-[11px] text-[#2C2926]/50 mt-1 font-medium italic">Carefully delivered across Yangon.</p></div></div>
+                <div className="flex items-center gap-4 p-5 bg-white/40 backdrop-blur-md rounded-[1.5rem] border border-white/60 shadow-sm"><div className="p-3 bg-white/60 text-[#2C2926]/60 rounded-full shadow-sm"><Truck className="w-5 h-5" /></div><div><h4 className="text-[10px] font-bold uppercase tracking-widest text-[#2C2926]/70">Bespoke Delivery</h4><p className="text-[11px] text-[#2C2926]/40 mt-1 font-medium italic">Carefully delivered across Yangon.</p></div></div>
               </div>
             </div>
           </div>
 
-          <section className="mt-24 pt-16 border-t border-white/20">
-             <div className="flex items-center justify-between mb-12"><h2 className="text-3xl font-serif italic text-[#2C2926]">Bespoke Reviews</h2><button className="text-[11px] font-bold uppercase border-b border-[#2C2926] pb-1 hover:text-[#D09478]">Share Experience</button></div>
-             <div className="grid md:grid-cols-2 gap-8">
-               {reviews.map((rev) => (
-                 <div key={rev.id} className="bg-white/40 backdrop-blur-md p-8 rounded-[2.5rem] border border-white/60 shadow-sm space-y-4">
-                   <div className="flex gap-1 text-amber-500">{[...Array(5)].map((_, i) => <Star key={i} className={cn("w-3.5 h-3.5", i < rev.rating ? "fill-current" : "text-gray-200")} />)}</div>
-                   <p className="text-sm text-[#2C2926]/70 font-medium italic leading-relaxed">"{rev.comment}"</p>
-                   <div className="flex items-center gap-3 pt-4 border-t border-white/10"><span className="text-[10px] font-bold uppercase tracking-widest text-[#2C2926]/30">{rev.user} — {rev.date}</span></div>
-                 </div>
-               ))}
-             </div>
+          <section className="mt-24 pt-16 border-t-2 border-white/20">
+             <div className="flex items-center justify-between mb-12"><h2 className="text-3xl font-serif italic text-[#2C2926] opacity-80">Bespoke Reviews</h2><button className="text-[11px] font-bold uppercase border-b-2 border-[#2C2926]/20 pb-1 hover:text-[#D09478] transition-colors text-[#2C2926]/60">Share Experience</button></div>
+             <div className="grid md:grid-cols-2 gap-8">{reviews.map((rev) => (<div key={rev.id} className="bg-white/40 backdrop-blur-md p-8 rounded-[2.5rem] border border-white/60 shadow-xl space-y-4"><div className="flex gap-1 text-amber-500/60">{[...Array(5)].map((_, i) => <Star key={i} className={cn("w-3.5 h-3.5", i < rev.rating ? "fill-current" : "text-gray-200")} />)}</div><p className="text-sm text-[#2C2926]/60 font-medium italic leading-relaxed">"{rev.comment}"</p><div className="flex items-center gap-3 pt-4 border-t border-white/20"><span className="text-[10px] font-bold uppercase tracking-widest text-[#2C2926]/30">{rev.user} — {rev.date}</span></div></div>))}</div>
           </section>
         </div>
         <Footer />

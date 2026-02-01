@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
+import { useRouter } from "next/navigation"; // 💡 Router ကို import လုပ်ပါသည်
 import { 
   ShoppingBag, Plus, Minus, Check, 
   Sparkles, RotateCcw, ChevronRight, ChevronLeft,
@@ -10,6 +11,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import Footer from "@/components/layout/footer";
 import { useCartStore } from "@/store/useCartStore";
+import { useAuthStore } from "@/store/useAuthStore"; // 💡 AuthStore ကို import လုပ်ပါသည်
 
 // --- STUDIO DATA CONFIGURATION ---
 const STUDIO_DATA: any = {
@@ -429,7 +431,9 @@ const STUDIO_DATA: any = {
 };
 
 export default function StudioPage() {
+  const router = useRouter(); 
   const { addToCart } = useCartStore();
+  const isLoggedIn = useAuthStore((state) => state.isLoggedIn); 
   const [mounted, setMounted] = useState(false);
   const [flowerType, setFlowerType] = useState("rose");
   const [count, setCount] = useState(5);
@@ -449,7 +453,16 @@ export default function StudioPage() {
   const currentPreviewImage = availableStyles[styleIndex] || availableStyles[0];
 
   const handleReset = () => { setCount(5); setFlowerType("rose"); setColorId("red"); setStyleIndex(0); };
+
+ 
   const handleAddToCart = () => {
+    if (!isLoggedIn) {
+      
+      alert("Join our community first! Please Register to customize and buy. ✨");
+      router.push("/auth/register"); 
+      return;
+    }
+
     const bespokeItem = { id: `bespoke-${Date.now()}`, name: `Bespoke ${currentFlowerData.name}`, price: count * 4500 + 10000, img: currentPreviewImage, quantity: 1, details: `${count} blooms, ${currentColor.name}` };
     addToCart(bespokeItem);
     setShowToast(true);

@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation"; 
 import { 
   Heart, Search, ShoppingBag, ArrowRight, Sparkles, ChevronRight,
   CheckCircle2, ArrowUp 
@@ -11,6 +12,7 @@ import Footer from "@/components/layout/footer";
 import { cn } from "@/lib/utils";
 import { useWishlistStore } from "@/store/useWishlistStore";
 import { useCartStore } from "@/store/useCartStore";
+import { useAuthStore } from "@/store/useAuthStore"; 
 
 const CATEGORIES = ["All", "Flower Bouquet", "Plush Toys", "Blind Box", "Lipstick", "Bag", "Chocolate"];
 const STATUS_FILTERS = ["Everything", "New Arrivals", "Pre-order"];
@@ -66,6 +68,7 @@ const PRODUCTS = [
 ];
 
 export default function ShopPage() {
+  const router = useRouter(); 
   const [activeCategory, setActiveCategory] = useState("All");
   const [activeStatus, setActiveStatus] = useState("Everything");
   const [searchQuery, setSearchQuery] = useState("");
@@ -76,24 +79,26 @@ export default function ShopPage() {
   const wishlist = useWishlistStore((state) => state.wishlist);
   const toggleWishlist = useWishlistStore((state) => state.toggleWishlist);
   const addToCart = useCartStore((state) => state.addToCart);
+  const isLoggedIn = useAuthStore((state) => state.isLoggedIn); 
 
   useEffect(() => { 
     setMounted(true); 
-
     const handleScroll = () => {
       if (window.scrollY > 400) setShowScrollTop(true);
       else setShowScrollTop(false);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
   const handleQuickAdd = (product: any) => {
+    if (!isLoggedIn) {
+      alert("Join our magic studio first! Please Register to continue. ✨");
+      router.push("/auth/register"); 
+      return;
+    }
     addToCart({ id: product.id, name: product.name, price: product.price, img: product.img, quantity: 1 });
     setShowToast(true);
     setTimeout(() => setShowToast(false), 3000);
@@ -115,25 +120,7 @@ export default function ShopPage() {
         const color = pinkShades[i % pinkShades.length];
         const size = Math.random() * 20 + 20;
         return (
-          <motion.div
-            key={`heart-${i}`}
-            className="absolute"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              filter: "drop-shadow(0 0 5px rgba(255, 105, 180, 0.3))"
-            }}
-            animate={{
-              y: [0, -80, 0],
-              opacity: [0, 0.8, 0],
-              scale: [0.6, 1, 0.6],
-            }}
-            transition={{ 
-              duration: Math.random() * 5 + 7,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          >
+          <motion.div key={`heart-${i}`} className="absolute" style={{ left: `${Math.random() * 100}%`, top: `${Math.random() * 100}%`, filter: "drop-shadow(0 0 5px rgba(255, 105, 180, 0.3))" }} animate={{ y: [0, -80, 0], opacity: [0, 0.8, 0], scale: [0.6, 1, 0.6], }} transition={{ duration: Math.random() * 5 + 7, repeat: Infinity, ease: "easeInOut" }} >
             <Heart size={size} fill={color} stroke="none" />
           </motion.div>
         );
@@ -145,31 +132,13 @@ export default function ShopPage() {
 
   return (
     <main className="flex flex-col w-full min-h-screen relative">
-      <div 
-        className="fixed inset-0 z-[-1] w-full h-full"
-        style={{
-          background: "linear-gradient(-45deg, #cb967d, #f8a2e3, #f8ffbd, #e5c5b1)",
-          backgroundSize: "400% 400%",
-          animation: "bgFlow 10s ease infinite",
-        }}
-      />
-      <style dangerouslySetInnerHTML={{ __html: `
-        @keyframes bgFlow {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-      `}} />
+      <div className="fixed inset-0 z-[-1] w-full h-full" style={{ background: "linear-gradient(-45deg, #cb967d, #f8a2e3, #f8ffbd, #e5c5b1)", backgroundSize: "400% 400%", animation: "bgFlow 10s ease infinite", }} />
+      <style dangerouslySetInnerHTML={{ __html: `@keyframes bgFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }` }} />
 
       <div className="relative z-10 w-full text-[#2C2926]">
-        
-        {/* SUCCESS TOAST */}
         <AnimatePresence>
           {showToast && (
-            <motion.div 
-              initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}
-              className="fixed top-24 right-6 z-[100] bg-[#2C2926] text-white px-6 py-4 rounded-2xl shadow-xl flex items-center gap-4"
-            >
+            <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="fixed top-24 right-6 z-[100] bg-[#2C2926] text-white px-6 py-4 rounded-2xl shadow-xl flex items-center gap-4" >
               <CheckCircle2 className="w-5 h-5 text-[#D09478]" />
               <p className="text-xs font-semibold tracking-wide">Item added to your bag</p>
             </motion.div>
@@ -191,15 +160,12 @@ export default function ShopPage() {
               <div className="flex flex-col md:flex-row items-center gap-4 w-full lg:w-auto">
                 <div className="relative w-full md:w-64">
                   <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#2C2926]/40" />
-                  <input 
-                    type="text" placeholder="Search Magic..."
-                    className="w-full bg-white/40 backdrop-blur-md rounded-xl py-2.5 pl-11 pr-4 text-[11px] font-medium uppercase tracking-widest outline-none border border-white/40 focus:border-[#2C2926]/30 transition-all placeholder:text-[#2C2926]/30"
-                    value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}
-                  />
+                  <input type="text" placeholder="Search Magic..." className="w-full bg-white/40 backdrop-blur-md rounded-xl py-2.5 pl-11 pr-4 text-[11px] font-medium uppercase tracking-widest outline-none border border-white/40 focus:border-[#2C2926]/30 transition-all placeholder:text-[#2C2926]/30" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
                 </div>
                 <div className="flex bg-white/30 backdrop-blur-md p-1 rounded-xl border border-white/40">
-                  {STATUS_FILTERS.map(status => (
-                    <button key={status} onClick={() => setActiveStatus(status)} className={cn("px-5 py-2 rounded-lg text-[10px] font-semibold uppercase tracking-widest transition-all", activeStatus === status ? "bg-white text-[#2C2926] shadow-sm" : "text-[#2C2926]/50 hover:text-[#2C2926]")}>{status}</button>
+                  {/* 💡 ဒီနေရာမှာ ပြင်ပေးထားပါတယ် (status are not defined error fix) */}
+                  {STATUS_FILTERS.map((statusItem) => (
+                    <button key={statusItem} onClick={() => setActiveStatus(statusItem)} className={cn("px-5 py-2 rounded-lg text-[10px] font-semibold uppercase tracking-widest transition-all", activeStatus === statusItem ? "bg-white text-[#2C2926] shadow-sm" : "text-[#2C2926]/50 hover:text-[#2C2926]")}>{statusItem}</button>
                   ))}
                 </div>
               </div>
@@ -249,16 +215,11 @@ export default function ShopPage() {
 
         <AnimatePresence>
           {showScrollTop && (
-            <motion.button
-              initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.5 }}
-              onClick={scrollToTop}
-              className="fixed bottom-10 left-6 z-50 w-12 h-12 rounded-full bg-[#2C2926] text-white shadow-2xl flex items-center justify-center hover:bg-[#D09478] transition-colors"
-            >
+            <motion.button initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.5 }} onClick={scrollToTop} className="fixed bottom-10 left-6 z-50 w-12 h-12 rounded-full bg-[#2C2926] text-white shadow-2xl flex items-center justify-center hover:bg-[#D09478] transition-colors" >
               <ArrowUp className="w-5 h-5" />
             </motion.button>
           )}
         </AnimatePresence>
-
         <Footer />
       </div>
     </main>
