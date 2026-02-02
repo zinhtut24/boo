@@ -124,9 +124,9 @@ export default function ContactPage() {
                <Heart className="absolute -bottom-6 -right-6 w-32 h-32 text-white opacity-[0.03] -rotate-12" />
                <h3 className="text-xl font-serif italic mb-6">Join our Universe</h3>
                <div className="flex gap-4">
-                  <a href="#" className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center hover:bg-[#D09478] transition-all"><Facebook size={20} /></a>
-                  <a href="#" className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center hover:bg-[#D09478] transition-all"><Instagram size={20} /></a>
-                  <a href="#" className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center hover:bg-[#D09478] transition-all"><MessageCircle size={20} /></a>
+                  <a href="https://www.facebook.com/sehun.c.zin" className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center hover:bg-[#D09478] transition-all"><Facebook size={20} /></a>
+                  <a href="https://www.instagram.com/moonlight24446?igsh=MTRkZThtbjNza3pzbw==" className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center hover:bg-[#D09478] transition-all"><Instagram size={20} /></a>
+                  <a href="https://www.instagram.com/moonlight24446?igsh=MTRkZThtbjNza3pzbw==" className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center hover:bg-[#D09478] transition-all"><MessageCircle size={20} /></a>
                </div>
             </div>
           </motion.div>

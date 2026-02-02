@@ -10,8 +10,8 @@ import { motion } from "framer-motion";
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
-  const FACEBOOK_URL = "https://www.facebook.com/yourfacebookpage"; 
-  const INSTAGRAM_URL = "https://www.instagram.com/yourinstagramprofile";
+  const FACEBOOK_URL = "https://www.facebook.com/sehun.c.zin"; 
+  const INSTAGRAM_URL = "https://www.instagram.com/moonlight24446?igsh=MTRkZThtbjNza3pzbw==";
   const FB_MESSENGER_URL = "https://m.me/yourfacebookusername"; 
   const WHATSAPP_URL = "https://wa.me/959789456123";
 
