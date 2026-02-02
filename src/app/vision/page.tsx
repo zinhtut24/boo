@@ -67,7 +67,7 @@ export default function VisionPage() {
             </div>
             <div className="aspect-square rounded-3xl overflow-hidden shadow-inner bg-white/20 border border-white/40 group">
               <img 
-                src="/images/Flowers/Rose/download (6).png" 
+                src="/images/gift.png" 
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
                 alt="Shop Story" 
               />
