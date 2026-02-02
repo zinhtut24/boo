@@ -662,8 +662,15 @@ export default function ProductDetail({ params }: { params: Promise<{ id: string
   const handlePrev = () => { setActiveIndex((prev) => (prev - 1 + totalGalleryItems) % totalGalleryItems); setIsSwapped(false); };
 
   return (
-    <main className="flex flex-col w-full min-h-screen relative overflow-x-hidden">
-      <div className="fixed inset-0 z-[-1] w-full h-full" style={{ background: "linear-gradient(-45deg, #cb967d, #f8a2e3, #f8ffbd, #e5c5b1)", backgroundSize: "400% 400%", animation: "bgFlow 10s ease infinite" }} />
+      <main className="flex flex-col w-full min-h-screen relative overflow-x-hidden">
+      <div 
+        className="fixed inset-0 z-[-1] w-full h-full"
+        style={{
+          background: "linear-gradient(-45deg, #cb967d, #f8a2e3, #f8ffbd, #e5c5b1)",
+          backgroundSize: "400% 400%",
+          animation: "bgFlow 10s ease infinite",
+        }}
+      />
 
       <div className="relative z-10 w-full text-[#2C2926] antialiased">
         <AnimatePresence>{showToast && (<motion.div initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 50 }} className="fixed top-24 right-6 z-[100] bg-[#2C2926] text-white px-6 py-4 rounded-2xl shadow-xl flex items-center gap-4 border border-white/20"><CheckCircle2 className="w-5 h-5 text-[#D09478]" /><div><p className="text-[10px] font-bold uppercase tracking-widest text-[#D09478]">Success</p><p className="text-xs font-semibold">Added to Bag</p></div></motion.div>)}</AnimatePresence>
