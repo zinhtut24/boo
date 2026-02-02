@@ -20,7 +20,7 @@ export default function RegisterPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [mounted, setMounted] = useState(false);
 
-  // ✅ Hydration Error ကာကွယ်ရန် useEffect ကိုသုံးပါသည်
+ 
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -46,7 +46,6 @@ export default function RegisterPage() {
 
   // 💡 --- BLING BLING HEARTS BACKGROUND ---
   const BlingHearts = () => {
-    // Browser မရောက်မချင်း (Server-side မှာ) ဘာမှမပြစေရန်
     if (!mounted) return null;
 
     return (

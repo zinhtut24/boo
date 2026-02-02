@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
-import { useRouter } from "next/navigation"; // 💡 Router ကို import လုပ်ပါသည်
+import { useRouter } from "next/navigation"; 
 import { 
   ShoppingBag, Plus, Minus, Check, 
   Sparkles, RotateCcw, ChevronRight, ChevronLeft,
@@ -11,7 +11,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import Footer from "@/components/layout/footer";
 import { useCartStore } from "@/store/useCartStore";
-import { useAuthStore } from "@/store/useAuthStore"; // 💡 AuthStore ကို import လုပ်ပါသည်
+import { useAuthStore } from "@/store/useAuthStore"; 
 
 // --- STUDIO DATA CONFIGURATION ---
 const STUDIO_DATA: any = {

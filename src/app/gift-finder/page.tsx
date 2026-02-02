@@ -23,34 +23,34 @@ interface QuizQuestion {
 const RECOMMENDATION_LOGIC: Record<string, any> = {
   elegant: {
     productId: "fb-2", 
-    title: "The Ivory Grace",
+    title: "White Lily Bloom",
     description: "A timeless arrangement of white lilies and artisanal flowers for a sophisticated soul.",
-    image: "/images/Flowers/Lilie/download (1).png",
-    price: "55,000 MMK",
+    image: "/images/F/L/LW5/1.png",
+    price: "32,500 MMK",
     match: 98
   },
   cute: {
     productId: "pt-1", 
-    title: "The Whimsical Bubu",
+    title: "Rabbit Bunny",
     description: "Soft textures and playful colors. This set features our signature plushies and sweet treats.",
-    image: "/images/Plush/Bu Bu/1.png",
-    price: "35,000 MMK",
+    image: "/images/Plush/Rabbit Bunny/1.png",
+    price: "20,000 MMK",
     match: 95
   },
   blind: {
     productId: "bb-1", 
-    title: "The Midnight Sparkle",
+    title: "SkullPanda ",
     description: "Luxury meets glamor. A curated box featuring high-shine accessories and premium items.",
-    image: "/images/Blindbox/nomiv1/nomiv1.png",
+    image: "/images/Blindbox/skullpanda2/skullpanda2.png",
     price: "85,000 MMK",
     match: 99
   },
   minimalist: {
     productId: "fb-3", 
-    title: "The Modern Essence",
+    title: "Lotus Elegance",
     description: "Clean lines and understated luxury. Simple, meaningful, and perfectly proportioned.",
-    image: "/images/Flowers/Lotus Flower/download1.png",
-    price: "45,000 MMK",
+    image: "/images/F/Lo/lp5/1.png",
+    price: "32,500 MMK",
     match: 92
   }
 };

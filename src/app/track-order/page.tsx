@@ -8,7 +8,7 @@ import Footer from "@/components/layout/footer";
 import { 
   Package, Truck, CheckCircle2, Search, 
   MapPin, Clock, Calendar, ArrowLeft, Heart, Sparkles, Loader2, 
-  ArrowRight // 💡 ဒီကောင်လေးကို ထပ်ဖြည့်ပေးပါ
+  ArrowRight 
 } from "lucide-react";
 
 // --- Mock Data ---

@@ -292,7 +292,7 @@ const ALL_PRODUCTS = [
       { original: "/images/Img/Bags/CK.png",
         model: "/images/Img/Bags/CKK1.png" },
       { original: "/images/Img/Bags/CK2.png", 
-        model: "/images/Img/Bags/CKK.png" }, // ဥပမာ - နောက်ထပ်အတွဲများ
+        model: "/images/Img/Bags/CKK.png" }, 
     ]
   },
   { 
