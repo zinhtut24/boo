@@ -16,7 +16,7 @@ import { useWishlistStore } from "@/store/useWishlistStore";
 import { useAuthStore } from "@/store/useAuthStore"; 
 import { cn } from "@/lib/utils";
 
-// --- Products Data ---
+// --- Products Data --- (မူရင်းအတိုင်း ထားရှိပါသည်)
 const ALL_PRODUCTS = [
   // --- Flower Bouquet ---
   { 
@@ -292,7 +292,7 @@ const ALL_PRODUCTS = [
       { original: "/images/Img/Bags/CK.png",
         model: "/images/Img/Bags/CKK1.png" },
       { original: "/images/Img/Bags/CK2.png", 
-        model: "/images/Img/Bags/CKK.png" }, 
+        model: "/images/Img/Bags/CKK.png" }, // ဥပမာ - နောက်ထပ်အတွဲများ
     ]
   },
   { 
@@ -636,13 +636,22 @@ export default function ProductDetail({ params }: { params: Promise<{ id: string
 
   if (!product) return <div className="pt-20 text-center text-gray-400">Product not found</div>;
 
+  // 💡 ပြင်ဆင်လိုက်သော Logic အပိုင်း
   const handleAddToCartWithToast = () => {
+    // ၁။ အရင်ဆုံး ပန်းစည်း (Flower) ဟုတ်မဟုတ် စစ်မည်
+    if (isFlower) {
+      router.push("/studio"); // ပန်းစည်းဖြစ်လျှင် Studio သို့ တိုက်ရိုက်ပို့မည်
+      return;
+    }
+
+    // ၂။ ပန်းစည်းမဟုတ်လျှင် Login ဝင်မဝင် စစ်မည်
     if (!isLoggedIn) {
       alert("Join our community first! Please Register to continue. ✨");
       router.push("/auth/register"); 
       return;
     }
 
+    // ၃။ Login ဝင်ပြီးသားဖြစ်ပါက Cart ထဲထည့်မည်
     if (product) {
       addToCart({ id: product.id, name: product.name, price: product.price, img: currentMainImage || product.img, quantity: quantity });
       setShowToast(true); setTimeout(() => setShowToast(false), 3000);
@@ -660,7 +669,6 @@ export default function ProductDetail({ params }: { params: Promise<{ id: string
         <AnimatePresence>{showToast && (<motion.div initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 50 }} className="fixed top-24 right-6 z-[100] bg-[#2C2926] text-white px-6 py-4 rounded-2xl shadow-xl flex items-center gap-4 border border-white/20"><CheckCircle2 className="w-5 h-5 text-[#D09478]" /><div><p className="text-[10px] font-bold uppercase tracking-widest text-[#D09478]">Success</p><p className="text-xs font-semibold">Added to Bag</p></div></motion.div>)}</AnimatePresence>
 
         <div className="container mx-auto px-6 pt-24 pb-12 max-w-[1100px]">
-          {/* 💡 Breadcrumb - SEMIBOLD & VISIBLE (Balanced) */}
           <nav className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.2em] mb-8">
             <Link href="/" className="text-[#2C2926]/40 hover:text-[#2C2926] transition-colors">Home</Link>
             <ChevronRightSquare className="w-3.5 h-3.5 text-[#2C2926]/20" />
@@ -713,7 +721,7 @@ export default function ProductDetail({ params }: { params: Promise<{ id: string
 
             <div className="lg:col-span-5 space-y-6 py-2">
               <div className="space-y-4">
-                <h1 className="text-4xl md:text-5xl font-serif text-[#2C2926] italic font-medium">Premium <br /> {product.name}</h1>
+                <h1 className="text-4xl md:text-5xl font-serif text-[#2C2926] italic font-medium">{product.name}</h1>
                 <p className="text-2xl font-semibold text-[#2C2926]/80">{(product.price * quantity).toLocaleString()} MMK</p>
               </div>
               <div className="space-y-5 pt-2">
@@ -721,6 +729,7 @@ export default function ProductDetail({ params }: { params: Promise<{ id: string
                   <div className="flex items-center justify-between bg-white/50 backdrop-blur-md px-3 py-2 rounded-full border border-white/60 shadow-sm"><span className="text-[10px] font-bold uppercase tracking-widest text-[#2C2926]/30 ml-6">Quantity</span><div className="flex items-center gap-6 mr-1 bg-white rounded-full px-6 py-2.5 shadow-sm"><button onClick={() => quantity > 1 && setQuantity(quantity - 1)} className="hover:text-[#D09478] text-[#2C2926]/60"><Minus className="w-4 h-4" /></button><span className="text-lg font-medium w-4 text-center">{quantity}</span><button onClick={() => setQuantity(quantity + 1)} className="hover:text-[#D09478] text-[#2C2926]/60"><Plus className="w-4 h-4" /></button></div></div>
                 )}
                 <div className="flex gap-3">
+                  {/* ခလုတ် Logic ကို onClick ထဲတွင် ကိုင်တွယ်ထားပါသည် */}
                   <button onClick={handleAddToCartWithToast} className="flex-1 bg-[#2C2926] text-white py-4.5 rounded-full font-bold uppercase tracking-widest text-[11px] hover:bg-[#D09478] transition-all shadow-xl active:scale-95 flex items-center justify-center gap-3">
                     {isFlower ? <Sparkles className="w-4 h-4" /> : <ShoppingBag className="w-4 h-4" />}
                     {isFlower ? "Customize in Studio" : "Add to Shopping Bag"}
